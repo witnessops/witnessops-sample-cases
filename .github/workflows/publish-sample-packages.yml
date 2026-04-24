@@ -1,0 +1,164 @@
+name: Publish sample packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: Branch to publish packages to
+        required: true
+        default: main
+
+permissions:
+  contents: write
+
+jobs:
+  publish-sample-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sample cases
+        uses: actions/checkout@v4
+        with:
+          path: sample-cases
+          ref: ${{ inputs.target_branch }}
+
+      - name: Checkout proof engine
+        uses: actions/checkout@v4
+        with:
+          repository: witnessops/witnessops-proof-engine
+          path: proof-engine
+
+      - name: Checkout verifier
+        uses: actions/checkout@v4
+        with:
+          repository: witnessops/witnessops-verifier
+          path: witnessops-verifier
+
+      - name: Checkout contracts
+        uses: actions/checkout@v4
+        with:
+          repository: witnessops/witnessops-contracts
+          path: witnessops-contracts
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install sample-cases dependencies
+        working-directory: sample-cases
+        run: pip install -r requirements-dev.txt
+
+      - name: Install proof-engine dependencies
+        working-directory: proof-engine
+        run: pip install -r requirements-dev.txt
+
+      - name: Install verifier dependencies
+        working-directory: witnessops-verifier
+        run: pip install -r requirements-dev.txt
+
+      - name: Export signed sample packages from proof engine
+        working-directory: proof-engine
+        run: |
+          python scripts/export_sample_package.py \
+            --fixture pass \
+            --output-dir dist/sample-packages \
+            --signed \
+            --verifier-dir ../witnessops-verifier \
+            --contracts-dir ../witnessops-contracts
+          python scripts/export_sample_package.py \
+            --fixture partial_missing_removal \
+            --output-dir dist/sample-packages \
+            --signed \
+            --verifier-dir ../witnessops-verifier \
+            --contracts-dir ../witnessops-contracts
+          python scripts/export_sample_package.py \
+            --fixture fail_scope_mismatch \
+            --output-dir dist/sample-packages \
+            --signed \
+            --verifier-dir ../witnessops-verifier \
+            --contracts-dir ../witnessops-contracts
+
+      - name: Import exported packages into sample cases
+        working-directory: sample-cases
+        run: python scripts/import_sample_packages.py --source-root ../proof-engine/dist/sample-packages --repo-root .
+
+      - name: Validate imported sample cases
+        working-directory: sample-cases
+        run: pytest -q
+
+      - name: Validate imported package contract artifacts
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from jsonschema import Draft202012Validator
+
+          packages = {
+              'privileged-access-approval/pass/package': 'pass',
+              'privileged-access-approval/partial-missing-removal/package': 'partial',
+              'privileged-access-approval/fail-scope-mismatch/package': 'fail',
+          }
+          schemas = {
+              'package_index': Path('witnessops-contracts/schemas/package-index.schema.json'),
+              'verification_result': Path('witnessops-contracts/schemas/verifier-result.schema.json'),
+              'receipt': Path('witnessops-contracts/schemas/receipt.schema.json'),
+              'manifest': Path('witnessops-contracts/schemas/evidence-manifest.schema.json'),
+          }
+          validators = {}
+          for name, schema_path in schemas.items():
+              schema = json.loads(schema_path.read_text(encoding='utf-8'))
+              Draft202012Validator.check_schema(schema)
+              validators[name] = Draft202012Validator(schema)
+
+          for package_relative, expected_outcome in packages.items():
+              package = Path('sample-cases') / package_relative
+              instances = {
+                  'package_index': package / 'package_index.json',
+                  'verification_result': package / 'verification_result.json',
+                  'receipt': package / 'receipt.json',
+                  'manifest': package / 'evidence_manifest.json',
+              }
+              for name, path in instances.items():
+                  instance = json.loads(path.read_text(encoding='utf-8'))
+                  errors = sorted(validators[name].iter_errors(instance), key=lambda error: list(error.path))
+                  assert errors == [], f'{package_relative}/{name} failed schema validation: {errors}'
+
+              verification_result = json.loads((package / 'verification_result.json').read_text(encoding='utf-8'))
+              package_index = json.loads((package / 'package_index.json').read_text(encoding='utf-8'))
+              receipt = json.loads((package / 'receipt.json').read_text(encoding='utf-8'))
+
+              assert verification_result['status'] == 'valid', verification_result
+              assert verification_result['outcome'] == expected_outcome, verification_result
+              assert receipt['result']['outcome'] == expected_outcome, receipt
+              assert package_index['outcome'] == expected_outcome, package_index
+              assert package_index['verification_status'] == 'valid', package_index
+              assert package_index['verification_result_source'] == 'witnessops_verifier', package_index
+          PY
+
+      - name: Confirm no forbidden key material was imported
+        working-directory: sample-cases
+        run: |
+          if find privileged-access-approval -name '*.hex' | grep -q .; then
+            echo "Forbidden .hex key-like file found in imported packages"
+            find privileged-access-approval -name '*.hex'
+            exit 1
+          fi
+          if grep -R "private_key\|signing_seed\|secret_key\|client_secret\|access_token\|api_token" privileged-access-approval/*/package; then
+            echo "Forbidden secret marker found in imported packages"
+            exit 1
+          fi
+
+      - name: Commit imported packages
+        working-directory: sample-cases
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add privileged-access-approval/pass/package \
+                  privileged-access-approval/partial-missing-removal/package \
+                  privileged-access-approval/fail-scope-mismatch/package
+          if git diff --cached --quiet; then
+            echo "No package changes to publish."
+          else
+            git commit -m "Publish generated privileged access sample packages"
+            git push origin HEAD:${{ inputs.target_branch }}
+          fi
