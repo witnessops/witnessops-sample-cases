@@ -24,6 +24,8 @@ REQUIRED_DOCS = [
     "docs/how-to-verify-sample.md",
     "docs/sample-case-boundaries.md",
     "docs/evidence-redaction-policy.md",
+    "docs/import-sample-packages.md",
+    "docs/import-publication-policy.md",
 ]
 
 FORBIDDEN_MARKERS = [
@@ -40,6 +42,19 @@ FORBIDDEN_MARKERS = [
 def test_required_docs_exist():
     for relative in REQUIRED_DOCS:
         assert (ROOT / relative).exists(), f"missing required doc: {relative}"
+
+
+def test_publication_policy_contains_required_gate_language():
+    policy = (ROOT / "docs" / "import-publication-policy.md").read_text(encoding="utf-8")
+    for marker in [
+        "Required verification before publication",
+        "Forbidden material",
+        "Required review before publication",
+        "Package update rule",
+        "verification_result.status = valid",
+        "package_index.verification_result_source = witnessops_verifier",
+    ]:
+        assert marker in policy, f"publication policy missing marker: {marker}"
 
 
 def test_expected_sample_case_directories_exist():
