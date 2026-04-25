@@ -1,0 +1,53 @@
+{
+  "schema": "witnessops.action_boundary.v1",
+  "sample_id": "AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1",
+  "action": {
+    "name": "sample_agent_config_change",
+    "description": "AI agent proposes and applies a bounded sample configuration change.",
+    "workflow": "agent_proposes_change_human_approves_agent_applies_evidence_captured",
+    "system_touched": "sample_config_repository",
+    "production": false
+  },
+  "allowed_scope": [
+    "Read sample change request.",
+    "Propose one sample config diff.",
+    "Apply one approved sample config diff.",
+    "Capture proof artifacts for the action.",
+    "Produce a portable receipt and verifier result."
+  ],
+  "blocked_scope": [
+    "No production deployment.",
+    "No cloud resource mutation.",
+    "No live customer data access.",
+    "No secrets access.",
+    "No broad refactor.",
+    "No additional workflow beyond the approved sample action."
+  ],
+  "execution_steps": [
+    {
+      "step": 1,
+      "actor": "agent_sample_001",
+      "event": "proposed_sample_config_change",
+      "evidence_ref": "EVIDENCE_MANIFEST.json#agent_proposal"
+    },
+    {
+      "step": 2,
+      "actor": "human_approver_sample_001",
+      "event": "approved_bounded_action",
+      "evidence_ref": "AUTHORITY_MAP.json#approval_gate"
+    },
+    {
+      "step": 3,
+      "actor": "agent_sample_001",
+      "event": "applied_approved_sample_change",
+      "evidence_ref": "RECEIPT.json#result"
+    },
+    {
+      "step": 4,
+      "actor": "witnessops_verifier_sample",
+      "event": "verified_receipt_shape_and_manifest_path",
+      "evidence_ref": "VERIFY_RESULT.json"
+    }
+  ]
+}
+

@@ -103,4 +103,4 @@ no private-key or secret markers
 
 ## Boundary
 
-Imported sample packages must come from fixture or redacted evidence. Do not import real customer evidence unless a separate publication approval exists.
+Imported sample packages must come from fixture or redacted evidence. Do not import live customer evidence unless a separate publication approval exists.

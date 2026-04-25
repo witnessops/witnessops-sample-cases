@@ -18,7 +18,7 @@ This repo presents and organizes sample cases. It does not define schemas, execu
 | Offline verifier implementation | No | Belongs in `witnessops-verifier`. |
 | Contract schemas | No | Belongs in `witnessops-contracts`. |
 | Key registry authority | No | Belongs in `witnessops-key-registry`. |
-| Private keys or real customer evidence | Never | Must not be committed here. |
+| Private keys or live customer evidence | Never | Must not be committed here. |
 
 ## Current sample cases
 
@@ -26,6 +26,7 @@ This repo presents and organizes sample cases. It does not define schemas, execu
 privileged-access-approval/pass
 privileged-access-approval/partial-missing-removal
 privileged-access-approval/fail-scope-mismatch
+sample-cases/ai-agent-action-proof-run
 ```
 
 ## Sample-case boundary
