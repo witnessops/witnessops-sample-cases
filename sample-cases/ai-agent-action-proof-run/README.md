@@ -8,6 +8,8 @@ Status: `sample_receipt_shape_ready`
 
 This sample shows how WitnessOps packages one consequential AI-agent-assisted workflow into a portable proof bundle.
 
+For a buyer-focused reading path, start with [`BUYER_WALKTHROUGH.md`](./BUYER_WALKTHROUGH.md).
+
 Sample workflow:
 
 1. AI agent proposes a bounded code/config change.
@@ -41,4 +43,3 @@ The receipt signature is simulated. The verifier result is sample-only and shoul
 ## Commercial Point
 
 WitnessOps gives enterprises a receipt they can verify after an AI agent acts.
-
