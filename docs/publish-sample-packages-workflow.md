@@ -4,6 +4,8 @@
 
 The `Publish sample packages` workflow is the controlled publication path for committing generated sample packages into this repository.
 
+This workflow is manual and depends on access to private/internal WitnessOps source repositories. It is not part of the default pull-request or push validation for this public buyer-facing sample repository.
+
 It keeps package custody bounded:
 
 ```text
@@ -39,6 +41,20 @@ Default:
 ```text
 main
 ```
+
+## Access boundary
+
+The workflow checks out these private/internal dependencies:
+
+```text
+witnessops-proof-engine
+witnessops-verifier
+witnessops-contracts
+```
+
+If GitHub Actions cannot access those repositories, publication must stop at checkout. That access failure is an authority or token configuration issue, not a sample-case validation failure.
+
+Default PR/push CI must remain standalone and local-only for this repository.
 
 ## Publication sequence
 
