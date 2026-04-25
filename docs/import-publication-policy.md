@@ -4,7 +4,9 @@
 
 This policy defines when generated WitnessOps sample packages may be committed into `witnessops-sample-cases`.
 
-The import CI proves that packages can be regenerated, imported, and validated. Committing generated packages into this repository is a separate publication act and requires an explicit publication gate.
+The manual publication workflow proves that packages can be regenerated, imported, and validated when private/internal WitnessOps source repositories are accessible. Committing generated packages into this repository is a separate publication act and requires an explicit publication gate.
+
+Default PR/push CI for this public buyer-facing repository is local-only. It must not silently depend on private proof-engine, verifier, or contracts repository access.
 
 ## Publication boundary
 
