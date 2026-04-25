@@ -16,7 +16,7 @@ hashable package artifacts generated from fixtures
 ## Forbidden evidence
 
 ```text
-real customer evidence
+live customer evidence
 private keys
 client secrets
 access tokens

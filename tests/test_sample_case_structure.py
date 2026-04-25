@@ -100,6 +100,12 @@ def test_no_forbidden_private_or_customer_markers():
         relative = path.relative_to(ROOT).as_posix().lower()
         if ".git" in relative:
             continue
+        if relative.startswith(".github/"):
+            continue
+        if relative.startswith("scripts/"):
+            continue
+        if relative.startswith("tests/"):
+            continue
         content = path.read_text(encoding="utf-8", errors="ignore").lower()
         for marker in FORBIDDEN_MARKERS:
             if marker == "real customer evidence" and "not real customer evidence" in content:

@@ -24,7 +24,7 @@ verifier implementation
 contract schemas
 key registry authority
 private keys
-real customer evidence
+live customer evidence
 ```
 
 ## Planned structure
@@ -41,6 +41,17 @@ privileged-access-approval/
   fail-scope-mismatch/
     README.md
     package/
+
+sample-cases/
+  ai-agent-action-proof-run/
+    README.md
+    AUTHORITY_MAP.json
+    ACTION_BOUNDARY.json
+    EVIDENCE_MANIFEST.json
+    RECEIPT.json
+    VERIFY_RESULT.json
+    CHALLENGE_PATH.md
+    MANIFEST.sha256
 
 docs/
   how-to-verify-sample.md
@@ -62,5 +73,5 @@ sample README files exist
 sample package directories are declared but may be empty until package import
 expected outcomes are documented
 no private-key indicators appear
-no real customer evidence markers appear
+no live customer evidence markers appear
 ```

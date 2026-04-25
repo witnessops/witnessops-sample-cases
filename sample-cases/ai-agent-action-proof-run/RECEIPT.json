@@ -1,0 +1,52 @@
+{
+  "schema": "witnessops.receipt.v1",
+  "sample_id": "AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1",
+  "receipt_id": "receipt_sample_ai_agent_action_20260425_001",
+  "issued_at": "2026-04-25T13:42:38Z",
+  "issuer": {
+    "name": "WitnessOps",
+    "mode": "sample_case"
+  },
+  "claim": "One AI-agent-assisted sample config change ran within a bounded approval and evidence boundary.",
+  "action": {
+    "name": "sample_agent_config_change",
+    "class": "agent_assisted_code_config_change",
+    "system_touched": "sample_config_repository",
+    "production": false
+  },
+  "authority": {
+    "authority_map": "AUTHORITY_MAP.json",
+    "approval_id": "approval_sample_20260425_001",
+    "approval_boundary": "one bounded sample config change only"
+  },
+  "evidence": {
+    "manifest": "EVIDENCE_MANIFEST.json",
+    "hash_manifest": "MANIFEST.sha256",
+    "challenge_path": "CHALLENGE_PATH.md"
+  },
+  "result": {
+    "status": "sample_completed",
+    "result_summary": "Sample proof bundle files were produced for receipt-shape and verifier-path inspection.",
+    "verifier_result": "VERIFY_RESULT.json"
+  },
+  "verification_boundaries": {
+    "verified": [
+      "required sample files exist",
+      "receipt references authority map, action boundary, evidence manifest, verifier result, and challenge path",
+      "sample bundle has a SHA-256 manifest"
+    ],
+    "not_verified": [
+      "production deployment",
+      "real cryptographic signing key custody",
+      "legal compliance",
+      "complete AI governance coverage",
+      "live third-party audit"
+    ]
+  },
+  "signature": {
+    "type": "simulated",
+    "status": "not_cryptographic_signature",
+    "value": "SIMULATED_SIGNATURE_FOR_SAMPLE_RECEIPT_SHAPE_ONLY"
+  }
+}
+

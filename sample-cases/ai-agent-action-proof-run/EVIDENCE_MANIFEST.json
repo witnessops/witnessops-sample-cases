@@ -1,0 +1,58 @@
+{
+  "schema": "witnessops.evidence_manifest.v1",
+  "sample_id": "AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1",
+  "generated_at": "2026-04-25T13:42:38Z",
+  "manifest_hash_file": "MANIFEST.sha256",
+  "artifacts": [
+    {
+      "id": "authority_map",
+      "path": "AUTHORITY_MAP.json",
+      "purpose": "Maps approval authority, operator authority, agent/tool authority, system touched, and negative boundaries.",
+      "hash": "recorded_in_MANIFEST.sha256"
+    },
+    {
+      "id": "action_boundary",
+      "path": "ACTION_BOUNDARY.json",
+      "purpose": "Defines allowed and blocked scope for the sample AI-agent action.",
+      "hash": "recorded_in_MANIFEST.sha256"
+    },
+    {
+      "id": "agent_proposal",
+      "path": "ACTION_BOUNDARY.json#execution_steps[0]",
+      "purpose": "Records that the sample agent proposed one bounded config change.",
+      "hash": "covered_by_ACTION_BOUNDARY.json"
+    },
+    {
+      "id": "approval_gate",
+      "path": "AUTHORITY_MAP.json#approval_gate",
+      "purpose": "Records the scoped human approval.",
+      "hash": "covered_by_AUTHORITY_MAP.json"
+    },
+    {
+      "id": "receipt",
+      "path": "RECEIPT.json",
+      "purpose": "Portable receipt for the bounded sample action.",
+      "hash": "recorded_in_MANIFEST.sha256"
+    },
+    {
+      "id": "verify_result",
+      "path": "VERIFY_RESULT.json",
+      "purpose": "Verifier result for sample-only receipt shape and manifest path.",
+      "hash": "recorded_in_MANIFEST.sha256"
+    },
+    {
+      "id": "challenge_path",
+      "path": "CHALLENGE_PATH.md",
+      "purpose": "Explains what a third party can inspect and challenge.",
+      "hash": "recorded_in_MANIFEST.sha256"
+    }
+  ],
+  "not_in_scope": [
+    "production deployment proof",
+    "legal compliance opinion",
+    "complete AI governance coverage",
+    "live cloud mutation",
+    "customer data handling"
+  ]
+}
+

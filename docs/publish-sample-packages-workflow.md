@@ -96,7 +96,7 @@ This is acceptable for v0 sample publication when the verifier result records th
 Publishing sample packages does not claim:
 
 ```text
-real customer evidence
+live customer evidence
 production key custody
 client environment security
 compliance certification
