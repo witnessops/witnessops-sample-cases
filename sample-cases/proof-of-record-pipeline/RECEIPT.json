@@ -1,0 +1,58 @@
+{
+  "action": {
+    "class": "record_only_connector_artifact_capture",
+    "name": "sample_proof_of_record_pipeline",
+    "production": false,
+    "system_touched": "sample_repository_change_surface"
+  },
+  "authority": {
+    "action_boundary": "ACTION_BOUNDARY.json",
+    "authority_gate": "sample.proof_of_record.record_only.v1",
+    "authority_map": "AUTHORITY_MAP.json",
+    "decision": "recorded"
+  },
+  "claim": "One connector-observed sample artifact was normalized, hashed, and recorded inside a bounded evidence manifest.",
+  "evidence": {
+    "canonical_payload": "CANONICAL_PAYLOAD.json",
+    "canonical_payload_hash": "sha256:587164ff16cd08fdfc818a103547ec6cb047cd36d2397088c5cb0ac4b12b0a26",
+    "challenge_path": "CHALLENGE_PATH.md",
+    "evidence_manifest_id": "evidence_manifest_sample_por_001",
+    "hash_manifest": "MANIFEST.sha256",
+    "manifest": "EVIDENCE_MANIFEST.json"
+  },
+  "issued_at": "2026-05-01T00:00:00Z",
+  "issuer": {
+    "mode": "sample_case",
+    "name": "WitnessOps"
+  },
+  "receipt_id": "sha256:e6ad202285a8df09bbd0f1619d5b6e39815b5ff75543994dd73bc92b805b00b5",
+  "receipt_type": "proof_of_record",
+  "result": {
+    "result_summary": "Sample proof-of-record files were produced for package-shape and local hash-reference inspection.",
+    "status": "sample_recorded",
+    "verifier_result": "VERIFY_RESULT.json"
+  },
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.proof_of_record.receipt.v1",
+  "signature": {
+    "status": "not_registry_attested",
+    "type": "simulated",
+    "value": "SIMULATED_SIGNATURE_FOR_PROOF_OF_RECORD_SAMPLE_ONLY"
+  },
+  "verification_boundaries": {
+    "not_verified": [
+      "source-system honesty",
+      "production deployment",
+      "production signer custody",
+      "legal compliance",
+      "semantic policy correctness",
+      "live third-party audit"
+    ],
+    "verified": [
+      "required sample files exist",
+      "source artifact hash matches the evidence manifest entry",
+      "receipt references the canonical payload, evidence manifest, authority map, action boundary, verifier result, and challenge path",
+      "sample bundle has a SHA-256 manifest"
+    ]
+  }
+}

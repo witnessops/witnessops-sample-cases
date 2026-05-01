@@ -52,6 +52,18 @@ sample-cases/
     VERIFY_RESULT.json
     CHALLENGE_PATH.md
     MANIFEST.sha256
+  proof-of-record-pipeline/
+    README.md
+    AUTHORITY_MAP.json
+    ACTION_BOUNDARY.json
+    CONNECTOR_EVENT.json
+    CANONICAL_PAYLOAD.json
+    EVIDENCE_MANIFEST.json
+    RECEIPT.json
+    VERIFY_RESULT.json
+    CHALLENGE_PATH.md
+    MANIFEST.sha256
+    artifacts/source_artifact.md
 
 docs/
   how-to-verify-sample.md

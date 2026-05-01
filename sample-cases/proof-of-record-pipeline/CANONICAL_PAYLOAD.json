@@ -1,0 +1,45 @@
+{
+  "artifact": {
+    "artifact_id": "sample-repository-change-summary-42",
+    "artifact_uri": "sample://github/repository-change/42/source-artifact",
+    "byte_length": 316,
+    "content_sha256": "sha256:b9551b32d6973e4383955980df857033870e7417657fa3c263675137e990cea0",
+    "media_type": "text/markdown",
+    "normalized_fields": {
+      "character_count": 316,
+      "line_count": 15,
+      "non_empty_line_count": 12
+    }
+  },
+  "authority_context": {
+    "authority_domain": "sample.proof_of_record",
+    "delegated_operator": "operator_sample_por_001",
+    "requested_action": "record_connector_artifact"
+  },
+  "metadata": {
+    "sample": true,
+    "workflow": "proof_of_record_pipeline"
+  },
+  "observed_at": "2026-05-01T00:00:00Z",
+  "policy_refs": [
+    {
+      "policy_id": "sample-proof-of-record-record-only-v1",
+      "uri": "policy://sample/proof-of-record/record-only/v1",
+      "version": "1.0.0"
+    }
+  ],
+  "record_type": "proof_of_record",
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.proof_of_record.canonical_payload.v1",
+  "source_connector": {
+    "name": "sample_github_connector",
+    "provider_event_id": "sample-github-pr-42",
+    "source_uri": "sample://github/repository-change/42",
+    "type": "github"
+  },
+  "subject": {
+    "subject_ref": "sample/repository-change#42",
+    "subject_type": "repository_change"
+  },
+  "target_environment": "sample_only"
+}
