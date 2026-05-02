@@ -1,0 +1,35 @@
+schema: witnessops.sample_cases_manifest.v1
+manifest_purpose: stable public index for sample-case receipt canary
+
+authority_boundary:
+  owns:
+    - sample-case path inventory
+    - public sample-case organization signal
+    - CI receipt canary input
+  does_not_own:
+    - proof-engine behavior
+    - verifier acceptance semantics
+    - contract schemas
+    - key registry authority
+    - production signing key custody
+    - live customer evidence
+
+sample_cases:
+  - id: privileged-access-approval-pass
+    path: privileged-access-approval/pass
+    evidence_class: synthetic_sample
+  - id: privileged-access-approval-partial-missing-removal
+    path: privileged-access-approval/partial-missing-removal
+    evidence_class: synthetic_sample
+  - id: privileged-access-approval-fail-scope-mismatch
+    path: privileged-access-approval/fail-scope-mismatch
+    evidence_class: synthetic_sample
+  - id: ai-agent-action-proof-run
+    path: sample-cases/ai-agent-action-proof-run
+    evidence_class: synthetic_sample
+
+receipt_canary:
+  diff_receipt_payload: receipts/sample-cases-manifest.diff
+  checksum: receipts/sample-cases-manifest.diff.sha256
+  sigstore_bundle: receipts/sample-cases-manifest.diff.sigstore.json
+  signer: github-actions-oidc-keyless-cosign
