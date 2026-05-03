@@ -1,0 +1,59 @@
+{
+  "canonical_payload_hash": "sha256:587164ff16cd08fdfc818a103547ec6cb047cd36d2397088c5cb0ac4b12b0a26",
+  "custody": {
+    "capture_boundary": "sample_connector_event_export",
+    "operator": "operator_sample_por_001",
+    "storage_boundary": "public_sample_case_repository"
+  },
+  "evidence_manifest_id": "evidence_manifest_sample_por_001",
+  "failure_states": [
+    "artifact_missing",
+    "artifact_hash_mismatch",
+    "connector_event_missing",
+    "authority_boundary_missing",
+    "receipt_reference_mismatch",
+    "challenge_path_incomplete",
+    "manifest_hash_mismatch"
+  ],
+  "items": [
+    {
+      "byte_length": 316,
+      "media_type": "text/markdown",
+      "observed_at": "2026-05-01T00:00:00Z",
+      "path": "artifacts/source_artifact.md",
+      "role": "source_artifact",
+      "sha256": "sha256:b9551b32d6973e4383955980df857033870e7417657fa3c263675137e990cea0",
+      "source_uri": "sample://github/repository-change/42/source-artifact"
+    },
+    {
+      "byte_length": 1195,
+      "media_type": "application/json",
+      "observed_at": "2026-05-01T00:00:00Z",
+      "path": "CONNECTOR_EVENT.json",
+      "role": "connector_event",
+      "sha256": "sha256:13e5e76451a20ea31043392b9a3a9ab88a6ce374f84bfdbc59e4b8cc9ca9f66f",
+      "source_uri": "sample://github/repository-change/42"
+    },
+    {
+      "byte_length": 1372,
+      "media_type": "application/json",
+      "observed_at": "2026-05-01T00:00:00Z",
+      "path": "AUTHORITY_MAP.json",
+      "role": "authority_map",
+      "sha256": "sha256:e3354e1c556d6dd4d80bba988e79c4b21fd4747fc89fb011d45fe9c7b3489557",
+      "source_uri": "authority://sample/proof-of-record/record-only/v1"
+    },
+    {
+      "byte_length": 910,
+      "media_type": "application/json",
+      "observed_at": "2026-05-01T00:00:00Z",
+      "path": "ACTION_BOUNDARY.json",
+      "role": "action_boundary",
+      "sha256": "sha256:d9fce95c4835a50683fd6680bcbd32484faf410d653678134e67d57eb32aeb80",
+      "source_uri": "boundary://sample/proof-of-record/action-boundary/v1"
+    }
+  ],
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.proof_of_record.evidence_manifest.v1",
+  "target_environment": "sample_only"
+}

@@ -1,0 +1,32 @@
+{
+  "allowed_actions": [
+    "capture one sample connector event",
+    "normalize one sample source artifact",
+    "compute local SHA-256 hashes",
+    "emit sample evidence manifest",
+    "emit sample receipt and challenge path"
+  ],
+  "blocked_actions": [
+    "approve access",
+    "merge code",
+    "deploy to production",
+    "assert source-system honesty",
+    "assert legal compliance",
+    "touch customer data or live systems"
+  ],
+  "bounded_subject": {
+    "subject_ref": "sample/repository-change#42",
+    "subject_type": "repository_change"
+  },
+  "failure_states": [
+    "artifact_missing",
+    "artifact_hash_mismatch",
+    "connector_event_missing",
+    "authority_boundary_missing",
+    "receipt_reference_mismatch",
+    "challenge_path_incomplete"
+  ],
+  "generated_at": "2026-05-01T00:00:00Z",
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.action_boundary.v1"
+}

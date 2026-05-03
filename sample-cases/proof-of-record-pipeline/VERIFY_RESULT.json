@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-05-01T00:00:00Z",
+  "checks": [
+    {
+      "expected": "sha256:b9551b32d6973e4383955980df857033870e7417657fa3c263675137e990cea0",
+      "name": "source_artifact_hash_matches_manifest",
+      "observed": "sha256:b9551b32d6973e4383955980df857033870e7417657fa3c263675137e990cea0",
+      "passed": true
+    },
+    {
+      "expected": "sha256:587164ff16cd08fdfc818a103547ec6cb047cd36d2397088c5cb0ac4b12b0a26",
+      "name": "canonical_payload_hash_matches_receipt",
+      "observed": "sha256:587164ff16cd08fdfc818a103547ec6cb047cd36d2397088c5cb0ac4b12b0a26",
+      "passed": true
+    },
+    {
+      "expected": "evidence_manifest_sample_por_001",
+      "name": "evidence_manifest_id_matches_receipt",
+      "observed": "evidence_manifest_sample_por_001",
+      "passed": true
+    },
+    {
+      "expected": false,
+      "name": "receipt_declares_sample_only_boundary",
+      "observed": false,
+      "passed": true
+    },
+    {
+      "expected": "simulated",
+      "name": "signature_boundary_is_sample_declared",
+      "observed": "simulated",
+      "passed": true
+    }
+  ],
+  "result": "pass_with_sample_limitations",
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.proof_of_record.verify_result.v1",
+  "trust_boundary": {
+    "accepted_inputs": [
+      "local sample bundle files",
+      "sample manifest entries"
+    ],
+    "not_verified_here": [
+      "external connector authenticity",
+      "governance approval authority",
+      "semantic policy correctness",
+      "production signer custody"
+    ]
+  },
+  "verification_result": {
+    "scope": "local_sample_bundle_only",
+    "status": "valid_sample"
+  },
+  "verified_mechanism": [
+    "SHA-256 over local sample files",
+    "receipt reference checks",
+    "sample-only boundary checks"
+  ]
+}

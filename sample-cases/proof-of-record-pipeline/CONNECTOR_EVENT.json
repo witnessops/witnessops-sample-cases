@@ -1,0 +1,37 @@
+{
+  "actor": {
+    "actor_type": "connector_actor",
+    "display_name": "sample-connector-actor",
+    "id": "connector_actor_sample_001"
+  },
+  "artifact": {
+    "artifact_id": "sample-repository-change-summary-42",
+    "artifact_uri": "sample://github/repository-change/42/source-artifact",
+    "byte_length": 316,
+    "media_type": "text/markdown",
+    "path": "artifacts/source_artifact.md",
+    "sha256": "sha256:b9551b32d6973e4383955980df857033870e7417657fa3c263675137e990cea0"
+  },
+  "authority_context": {
+    "authority_domain": "sample.proof_of_record",
+    "delegated_operator": "operator_sample_por_001",
+    "requested_action": "record_connector_artifact"
+  },
+  "connector": {
+    "name": "sample_github_connector",
+    "provider_event_id": "sample-github-pr-42",
+    "source_uri": "sample://github/repository-change/42",
+    "type": "github"
+  },
+  "metadata": {
+    "sample": true,
+    "workflow": "proof_of_record_pipeline"
+  },
+  "observed_at": "2026-05-01T00:00:00Z",
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.connector_event.v1",
+  "subject": {
+    "subject_ref": "sample/repository-change#42",
+    "subject_type": "repository_change"
+  }
+}

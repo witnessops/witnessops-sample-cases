@@ -1,0 +1,40 @@
+{
+  "authority_boundary": {
+    "action_class": "record_only_connector_artifact_capture",
+    "approval_required": false,
+    "connector": {
+      "authority": "emit one sample connector event for package-shape inspection",
+      "id": "connector_sample_github_001",
+      "name": "sample_github_connector"
+    },
+    "operator": {
+      "authority": "create one sample Proof-Of-Record bundle only",
+      "id": "operator_sample_por_001",
+      "role": "witnessops_sample_operator"
+    },
+    "system_touched": {
+      "environment": "sample_only",
+      "id": "system_sample_repo_001",
+      "name": "sample_repository_change_surface",
+      "production": false
+    }
+  },
+  "generated_at": "2026-05-01T00:00:00Z",
+  "negative_boundaries": [
+    "No production deployment is claimed.",
+    "No source-system authenticity conclusion is claimed.",
+    "No policy acceptance decision is claimed.",
+    "No legal compliance conclusion is claimed.",
+    "No access to secrets, customer data, or live systems is claimed."
+  ],
+  "record_gate": {
+    "allowed_decisions": [
+      "recorded"
+    ],
+    "decision": "recorded",
+    "decision_scope": "record evidence only; no operational approval or deployment authority",
+    "gate_id": "sample.proof_of_record.record_only.v1"
+  },
+  "sample_id": "PROOF_OF_RECORD_PIPELINE_SAMPLE_V1",
+  "schema": "witnessops.authority_map.v1"
+}
