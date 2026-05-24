@@ -1,0 +1,46 @@
+{
+  "schema": "witnessops.authority_map.v1",
+  "sample_id": "PHONE_SECURITY_PROOF_PACK_SAMPLE_V1",
+  "generated_at": "2026-05-24T00:00:00Z",
+  "authority_boundary": {
+    "action_class": "phone_security_proof_pack_review",
+    "authorization_required": true,
+    "client_authority": {
+      "id": "client_device_owner_sample_001",
+      "role": "device_owner_or_authorized_client",
+      "authority": "authorize one scoped synthetic phone security proof-pack example"
+    },
+    "phone_security_operator": {
+      "id": "phone_operator_sample_001",
+      "role": "mobile_security_operator",
+      "authority": "perform scoped device check and export agreed non-secret outputs"
+    },
+    "proof_pack_operator": {
+      "id": "witnessops_packager_sample_001",
+      "role": "proof_pack_author",
+      "authority": "organize supplied outputs into a bounded sample evidence pack"
+    },
+    "system_touched": {
+      "id": "sample_phone_security_workflow",
+      "name": "sample_phone_security_outputs",
+      "environment": "sample_only",
+      "production": false
+    }
+  },
+  "authorization_gate": {
+    "authorization_id": "phone_security_sample_20260524_001",
+    "authorized_at": "2026-05-24T00:00:00Z",
+    "authorized_by": "client_device_owner_sample_001",
+    "authorization_text": "Authorize a sample phone security proof-pack example using synthetic outputs only.",
+    "expires_after_action": true
+  },
+  "negative_boundaries": [
+    "No spyware detection is claimed.",
+    "No absence of compromise is claimed.",
+    "No forensic admissibility is claimed.",
+    "No legal compliance conclusion is claimed.",
+    "No production deployment is claimed.",
+    "No access to secrets, customer data, or live systems is claimed.",
+    "No whole-device assurance is claimed."
+  ]
+}

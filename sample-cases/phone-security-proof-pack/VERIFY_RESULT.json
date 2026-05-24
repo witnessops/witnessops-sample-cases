@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-05-24T00:00:00Z",
+  "checks": [
+    {
+      "expected": "sha256:615647f5aff6563e3a12a4852328e4257d168adc86ba84fbdb6df98565f6f666",
+      "name": "device_check_summary_hash_matches_manifest",
+      "observed": "sha256:615647f5aff6563e3a12a4852328e4257d168adc86ba84fbdb6df98565f6f666",
+      "passed": true
+    },
+    {
+      "expected": "evidence_manifest_sample_phone_security_001",
+      "name": "evidence_manifest_id_matches_receipt",
+      "observed": "evidence_manifest_sample_phone_security_001",
+      "passed": true
+    },
+    {
+      "expected": false,
+      "name": "receipt_declares_sample_only_boundary",
+      "observed": false,
+      "passed": true
+    },
+    {
+      "expected": "simulated",
+      "name": "signature_boundary_is_sample_declared",
+      "observed": "simulated",
+      "passed": true
+    }
+  ],
+  "result": "pass_with_sample_limitations",
+  "sample_id": "PHONE_SECURITY_PROOF_PACK_SAMPLE_V1",
+  "schema": "witnessops.phone_security.verify_result.v1",
+  "trust_boundary": {
+    "accepted_inputs": [
+      "local sample bundle files",
+      "sample manifest entries",
+      "synthetic phone security output summary"
+    ],
+    "not_verified_here": [
+      "spyware detection",
+      "absence of compromise",
+      "device handling continuity",
+      "app provenance",
+      "boot integrity",
+      "legal admissibility",
+      "production signer custody"
+    ]
+  },
+  "verification_result": {
+    "scope": "local_sample_bundle_only",
+    "status": "valid_sample"
+  },
+  "verified_mechanism": [
+    "SHA-256 over local sample files",
+    "receipt reference checks",
+    "sample-only boundary checks"
+  ]
+}

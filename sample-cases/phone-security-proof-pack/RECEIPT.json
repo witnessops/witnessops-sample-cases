@@ -1,0 +1,60 @@
+{
+  "action": {
+    "class": "sample_phone_security_proof_pack",
+    "name": "sample_phone_security_proof_pack_review",
+    "production": false,
+    "system_touched": "sample_phone_security_outputs"
+  },
+  "authority": {
+    "action_boundary": "ACTION_BOUNDARY.json",
+    "authority_gate": "sample.phone_security.proof_pack.v1",
+    "authority_map": "AUTHORITY_MAP.json",
+    "decision": "recorded"
+  },
+  "claim": "One synthetic phone security workflow was packaged into a bounded proof pack with observed outputs, gaps, and safe client language.",
+  "evidence": {
+    "challenge_path": "CHALLENGE_PATH.md",
+    "device_check_summary": "artifacts/device_check_summary.md",
+    "evidence_manifest_id": "evidence_manifest_sample_phone_security_001",
+    "hash_manifest": "MANIFEST.sha256",
+    "manifest": "EVIDENCE_MANIFEST.json",
+    "sample_deliverable_plan": "SAMPLE_DELIVERABLE_PLAN.md"
+  },
+  "issued_at": "2026-05-24T00:00:00Z",
+  "issuer": {
+    "mode": "sample_case",
+    "name": "WitnessOps"
+  },
+  "receipt_id": "sha256:a7b6628e5255973ff9645f7088972315f0608fa768835fa63f297417edf3fd8b",
+  "receipt_type": "phone_security_proof_pack",
+  "result": {
+    "result_summary": "Sample phone security proof-pack files were produced for package-shape and local hash-reference inspection.",
+    "status": "sample_recorded",
+    "verifier_result": "VERIFY_RESULT.json"
+  },
+  "sample_id": "PHONE_SECURITY_PROOF_PACK_SAMPLE_V1",
+  "schema": "witnessops.phone_security.receipt.v1",
+  "signature": {
+    "status": "not_registry_attested",
+    "type": "simulated",
+    "value": "SIMULATED_SIGNATURE_FOR_PHONE_SECURITY_PROOF_PACK_SAMPLE_ONLY"
+  },
+  "verification_boundaries": {
+    "not_verified": [
+      "spyware detection",
+      "absence of compromise",
+      "forensic admissibility",
+      "source-system honesty",
+      "production deployment",
+      "production signer custody",
+      "legal compliance",
+      "whole-device assurance"
+    ],
+    "verified": [
+      "required sample files exist",
+      "synthetic device-check summary hash matches the evidence manifest entry",
+      "receipt references the evidence manifest, authority map, action boundary, verifier result, deliverable plan, and challenge path",
+      "sample bundle has a SHA-256 manifest"
+    ]
+  }
+}

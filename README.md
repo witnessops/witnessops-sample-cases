@@ -28,6 +28,7 @@ privileged-access-approval/partial-missing-removal
 privileged-access-approval/fail-scope-mismatch
 sample-cases/ai-agent-action-proof-run
 sample-cases/proof-of-record-pipeline
+sample-cases/phone-security-proof-pack
 ```
 
 ## Sample-case boundary
