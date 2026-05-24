@@ -1,0 +1,35 @@
+{
+  "schema": "witnessops.action_boundary.v1",
+  "sample_id": "PHONE_SECURITY_PROOF_PACK_SAMPLE_V1",
+  "action": {
+    "class": "sample_phone_security_proof_pack",
+    "name": "sample_phone_security_proof_pack_review",
+    "environment": "sample_only",
+    "production": false
+  },
+  "allowed": [
+    "record a synthetic client authorization boundary",
+    "record a synthetic phone security operator workflow boundary",
+    "package synthetic tool-output summaries and observations",
+    "name evidence gaps and unsupported claims",
+    "produce a client-safe proof-pack summary"
+  ],
+  "blocked": [
+    "claim spyware detection",
+    "claim absence of compromise",
+    "claim forensic admissibility",
+    "claim live customer device handling",
+    "claim production signing-key custody",
+    "include secrets, credentials, customer records, or live device evidence",
+    "represent the sample verifier result as a production verification"
+  ],
+  "required_outputs": [
+    "AUTHORITY_MAP.json",
+    "EVIDENCE_MANIFEST.json",
+    "RECEIPT.json",
+    "VERIFY_RESULT.json",
+    "CHALLENGE_PATH.md",
+    "SAMPLE_DELIVERABLE_PLAN.md"
+  ],
+  "safe_claim_rule": "Every buyer-facing claim must distinguish observed output from unsupported compromise, integrity, provenance, legal, or forensic conclusions."
+}

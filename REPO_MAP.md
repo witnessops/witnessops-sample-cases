@@ -64,6 +64,17 @@ sample-cases/
     CHALLENGE_PATH.md
     MANIFEST.sha256
     artifacts/source_artifact.md
+  phone-security-proof-pack/
+    README.md
+    AUTHORITY_MAP.json
+    ACTION_BOUNDARY.json
+    EVIDENCE_MANIFEST.json
+    RECEIPT.json
+    VERIFY_RESULT.json
+    SAMPLE_DELIVERABLE_PLAN.md
+    CHALLENGE_PATH.md
+    MANIFEST.sha256
+    artifacts/device_check_summary.md
 
 docs/
   how-to-verify-sample.md

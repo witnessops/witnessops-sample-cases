@@ -1,0 +1,56 @@
+{
+  "canonical_payload_hash": "sha256:615647f5aff6563e3a12a4852328e4257d168adc86ba84fbdb6df98565f6f666",
+  "custody": {
+    "capture_boundary": "synthetic_phone_security_output_export",
+    "operator": "witnessops_packager_sample_001",
+    "storage_boundary": "public_sample_case_repository"
+  },
+  "evidence_manifest_id": "evidence_manifest_sample_phone_security_001",
+  "failure_states": [
+    "authorization_missing",
+    "device_summary_missing",
+    "tool_output_missing",
+    "artifact_hash_mismatch",
+    "authority_boundary_missing",
+    "receipt_reference_mismatch",
+    "challenge_path_incomplete",
+    "unsupported_compromise_claim"
+  ],
+  "items": [
+    {
+      "media_type": "text/markdown",
+      "observed_at": "2026-05-24T00:00:00Z",
+      "path": "artifacts/device_check_summary.md",
+      "role": "synthetic_device_check_summary",
+      "sha256": "sha256:615647f5aff6563e3a12a4852328e4257d168adc86ba84fbdb6df98565f6f666",
+      "source_uri": "sample://phone-security/device-check-summary"
+    },
+    {
+      "media_type": "text/markdown",
+      "observed_at": "2026-05-24T00:00:00Z",
+      "path": "SAMPLE_DELIVERABLE_PLAN.md",
+      "role": "sample_deliverable_plan",
+      "sha256": "sha256:08bb7402ea2c270cc4d2a9be14f18c408043c9187527505ee6728dc269a4fff0",
+      "source_uri": "sample://phone-security/proof-pack-plan"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-05-24T00:00:00Z",
+      "path": "AUTHORITY_MAP.json",
+      "role": "authority_map",
+      "sha256": "sha256:8ee3683dc233e7ff04950d3c188b510ff1ecfc21bfb2d84752406e9a8ed32d34",
+      "source_uri": "authority://sample/phone-security/proof-pack/v1"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-05-24T00:00:00Z",
+      "path": "ACTION_BOUNDARY.json",
+      "role": "action_boundary",
+      "sha256": "sha256:d7890741f64be627a199d79680d3fd1adac8ece2d00e4ac649af38b715af755c",
+      "source_uri": "boundary://sample/phone-security/action-boundary/v1"
+    }
+  ],
+  "sample_id": "PHONE_SECURITY_PROOF_PACK_SAMPLE_V1",
+  "schema": "witnessops.phone_security.evidence_manifest.v1",
+  "target_environment": "sample_only"
+}
