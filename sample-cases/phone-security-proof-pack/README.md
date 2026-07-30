@@ -6,6 +6,8 @@ Status: `sample_receipt_shape_ready`
 
 ## Purpose
 
+**Situation:** a phone security check needs a client-readable package of what was observed and what remains unproven.
+
 This sample shows how WitnessOps can package one phone security check into a bounded client proof pack.
 
 Sample workflow:

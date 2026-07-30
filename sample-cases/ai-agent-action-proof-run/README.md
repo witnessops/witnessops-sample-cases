@@ -6,6 +6,11 @@ Status: `sample_receipt_shape_ready`
 
 ## Purpose
 
+**Situation:** an AI agent proposed and applied one bounded code or configuration change after human approval.
+
+**Buyer title on the site:** AI agent change package.
+
+
 This sample shows how WitnessOps packages one consequential AI-agent-assisted workflow into a portable proof bundle.
 
 For a buyer-focused reading path, start with [`BUYER_WALKTHROUGH.md`](./BUYER_WALKTHROUGH.md).

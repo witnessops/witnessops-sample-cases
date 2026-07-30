@@ -1,85 +1,83 @@
 # witnessops-sample-cases
 
-Stable sample-case surface for WitnessOps proof packages.
+Public sample packages for WitnessOps reviews.
 
-This repository holds inspectable, reproducible sample cases that buyers, auditors, partners, and challengers can use to understand how WitnessOps proof packages are structured and verified.
+Use these when you want to **inspect an example** before requesting work: what was checked, which files ship, and what the package does **not** prove.
+
+## For buyers (start here)
+
+1. Open a sample under `sample-cases/`.
+2. Read that package’s `README.md` (situation, inspect, does not prove).
+3. Prefer `BUYER_WALKTHROUGH.md` when present.
+4. Run `shasum -a 256 -c MANIFEST.sha256` from the package directory.
+5. Treat every sample as **synthetic / labelled** — not live customer evidence.
+
+Public web walkthroughs (buyer chrome):
+
+- https://witnessops.com/review/sample-cases
+- AI agent change package, SBOM minimum-elements check, and related examples
 
 ## Authority boundary
 
-This repo presents and organizes sample cases. It does not define schemas, execute proof runs, sign receipts, or implement verification logic.
+This repo presents and organizes sample cases. It does not define schemas, execute production reviews, sign production receipts, or implement the offline verifier.
 
 | Concern | Owned here? | Notes |
 |---|---:|---|
-| Sample-case READMEs | Yes | Buyer/auditor walkthroughs and scenario explanations. |
-| Stable sample package paths | Yes | Packages exported from `witnessops-proof-engine`. |
-| Expected verifier outcomes | Yes | Expected package verification status and workflow result. |
-| Redaction notes | Yes | Explains why sample evidence is synthetic/redacted. |
-| Proof-engine source code | No | Belongs in `witnessops-proof-engine`. |
-| Offline verifier implementation | No | Belongs in `witnessops-verifier`. |
-| Contract schemas | No | Belongs in `witnessops-contracts`. |
-| Key registry authority | No | Belongs in `witnessops-key-registry`. |
-| Private keys or live customer evidence | Never | Must not be committed here. |
+| Sample READMEs and buyer walkthroughs | Yes | Situation, inspect, does-not-prove language |
+| Stable sample package paths | Yes | Files exported or authored as public samples |
+| Expected sample verifier outcomes | Yes | Sample-scoped results only |
+| Redaction / sample-boundary notes | Yes | Why evidence is synthetic |
+| Proof-engine source | No | `witnessops-proof-engine` |
+| Offline verifier | No | `witnessops-verifier` |
+| Contract schemas | No | `witnessops-contracts` |
+| Key registry | No | `witnessops-key-registry` |
+| Private keys or live customer evidence | Never | Must not be committed here |
 
-## Current sample cases
+## Current sample packages
 
 ```text
-privileged-access-approval/pass
+sample-cases/ai-agent-action-proof-run          # full package — AI agent change
+sample-cases/sbom-cisa-2026-minimum-elements    # full package — SBOM min-elements check
+sample-cases/phone-security-proof-pack          # full package — phone security shape
+sample-cases/proof-of-record-pipeline           # full package — record pipeline shape
+privileged-access-approval/pass                 # outcome demo (pass)
 privileged-access-approval/partial-missing-removal
 privileged-access-approval/fail-scope-mismatch
-sample-cases/ai-agent-action-proof-run
-sample-cases/proof-of-record-pipeline
-sample-cases/phone-security-proof-pack
-sample-cases/sbom-cisa-2026-minimum-elements
 ```
 
-## Sample-case boundary
+Web presentation is selective: not every GitHub package has a marketing page. Prefer the site index for buyer entry; use this repo for file-level inspection.
 
-These cases are not customer evidence. They demonstrate package mechanics:
+## What samples can show
 
 ```text
-receipt structure
-evidence manifest structure
-package index structure
-verification result structure
-report boundary
-offline verification path
-workflow outcome semantics
+package file layout
+authority and action boundary language
+evidence manifest shape
+receipt and sample verifier-result shape
+named gaps and challenge path
+local hash (MANIFEST.sha256) checks
 ```
 
-They do not prove:
+## What samples cannot show
 
 ```text
+live customer evidence
+production signing-key custody
 source-system honesty
-production signing key custody
-client environment security
-IAM certification
-real customer control effectiveness
+compliance or audit certification
+client environment security as a whole
 ```
 
-## Verification path
-
-A complete sample package should be verifiable with:
+## Local verification
 
 ```bash
-PYTHONPATH=../witnessops-verifier \
-python ../witnessops-verifier/verifier/witnessops_verify.py ./privileged-access-approval/pass/package \
-  --contracts-dir ../witnessops-contracts \
-  --key-registry-dir ../witnessops-key-registry
+cd sample-cases/<package>
+shasum -a 256 -c MANIFEST.sha256
 ```
 
-If no registry-compatible key is supplied, `key_registry` may be `skipped` in verifier v0.
+Where a full offline verifier is used for imported packages, record the exact command and refs in that package’s docs. Sample signatures are often **simulated**.
 
-## Source of packages
+## Publication rule
 
-Sample packages should be generated by `witnessops-proof-engine` using:
-
-```bash
-python scripts/export_sample_package.py \
-  --fixture pass \
-  --output-dir dist/sample-packages \
-  --signed \
-  --verifier-dir ../witnessops-verifier \
-  --contracts-dir ../witnessops-contracts
-```
-
-Then copied into this repo under the matching sample-case path.
+Do not commit secrets, customer data, production evidence, or private keys.  
+If package files change, update `MANIFEST.sha256` and any hash references in the same change.

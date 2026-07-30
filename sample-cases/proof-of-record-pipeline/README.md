@@ -6,6 +6,7 @@ Status: `sample_receipt_shape_ready`
 
 ## Purpose
 
+**Situation:** a connector or source event needs a portable proof-of-record package for later inspection.
 This sample shows how WitnessOps can package one connector-observed artifact into a bounded Proof-Of-Record bundle.
 
 Sample workflow:
