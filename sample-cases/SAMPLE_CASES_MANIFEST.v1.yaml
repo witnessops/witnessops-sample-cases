@@ -30,6 +30,9 @@ sample_cases:
   - id: phone-security-proof-pack
     path: sample-cases/phone-security-proof-pack
     evidence_class: synthetic_sample
+  - id: sbom-cisa-2026-minimum-elements
+    path: sample-cases/sbom-cisa-2026-minimum-elements
+    evidence_class: synthetic_sample
 
 receipt_canary:
   diff_receipt_payload: receipts/sample-cases-manifest.diff

@@ -1,0 +1,41 @@
+{
+  "schema": "witnessops.action_boundary.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "action": {
+    "class": "sample_sbom_cisa_2026_min_elements_review",
+    "name": "sample_sbom_minimum_elements_package_check",
+    "environment": "sample_only",
+    "production": false
+  },
+  "allowed": [
+    "record a synthetic software unit and SBOM generation context",
+    "package a synthetic machine-readable SBOM fragment",
+    "map sample fields against a CISA 2026 minimum-elements checklist",
+    "name present, partial, missing, and unknown element statuses",
+    "produce a client-safe proof-pack summary with named gaps"
+  ],
+  "blocked": [
+    "claim CISA, federal, or third-party compliance certification",
+    "claim the software is free of vulnerabilities",
+    "claim KEV absence or exploitability conclusions",
+    "claim live customer or production SBOM authenticity",
+    "claim production signing-key custody",
+    "include secrets, credentials, customer records, or live proprietary SBOMs",
+    "represent the sample verifier result as a production verification",
+    "claim complete AI-SBOM or SaaS multi-tenant coverage"
+  ],
+  "required_outputs": [
+    "AUTHORITY_MAP.json",
+    "ACTION_BOUNDARY.json",
+    "artifacts/synthetic_sbom.cdx.json",
+    "artifacts/generation_context.json",
+    "artifacts/min_elements_checklist.json",
+    "EVIDENCE_MANIFEST.json",
+    "RECEIPT.json",
+    "VERIFY_RESULT.json",
+    "CHALLENGE_PATH.md",
+    "SAMPLE_DELIVERABLE_PLAN.md",
+    "MANIFEST.sha256"
+  ],
+  "safe_claim_rule": "Every buyer-facing claim must distinguish checklist observation on sample artifacts from compliance, vulnerability, exploitability, supplier honesty, or production-build conclusions."
+}

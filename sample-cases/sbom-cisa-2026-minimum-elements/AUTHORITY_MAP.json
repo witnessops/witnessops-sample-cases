@@ -1,0 +1,45 @@
+{
+  "schema": "witnessops.authority_map.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "generated_at": "2026-07-30T00:00:00Z",
+  "authority_boundary": {
+    "action_class": "sbom_cisa_2026_min_elements_review",
+    "authorization_required": true,
+    "buyer_authority": {
+      "id": "buyer_sample_001",
+      "role": "software_buyer_or_operator",
+      "authority": "request one bounded synthetic SBOM minimum-elements package check"
+    },
+    "sbom_producer_authority": {
+      "id": "sbom_producer_sample_001",
+      "role": "component_or_sbom_producer",
+      "authority": "supply a synthetic SBOM fragment and generation context for packaging"
+    },
+    "proof_pack_operator": {
+      "id": "witnessops_packager_sample_001",
+      "role": "proof_pack_author",
+      "authority": "organize supplied sample SBOM artifacts into a bounded evidence pack and checklist"
+    },
+    "system_touched": {
+      "id": "sample_sbom_review_workflow",
+      "name": "sample_sbom_cisa_2026_outputs",
+      "environment": "sample_only",
+      "production": false
+    }
+  },
+  "authorization_gate": {
+    "authorization_id": "sbom_cisa_2026_sample_20260730_001",
+    "authorized_at": "2026-07-30T00:00:00Z",
+    "authorized_by": "buyer_sample_001",
+    "authorization_text": "Authorize a sample SBOM minimum-elements package check using synthetic SBOM artifacts only. Do not treat the result as compliance certification.",
+    "expires_after_action": true
+  },
+  "negative_boundaries": [
+    "No CISA or federal compliance certification is claimed.",
+    "No vulnerability-free or KEV-absence conclusion is claimed.",
+    "No production deployment or live customer SBOM authenticity is claimed.",
+    "No production signer custody is claimed.",
+    "No secrets, customer data, or proprietary live SBOMs are included.",
+    "No complete AI-SBOM or SaaS multi-tenant assurance is claimed."
+  ]
+}

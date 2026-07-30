@@ -1,0 +1,33 @@
+{
+  "schema": "witnessops.sbom.generation_context.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "generated_at": "2026-07-30T00:00:00Z",
+  "sbom_generation_context": {
+    "purpose": "Demonstrate packaging of a synthetic SBOM against CISA 2026 minimum elements for a bounded review sample.",
+    "software_unit": {
+      "name": "sample-app",
+      "version": "1.2.0",
+      "environment": "sample_only",
+      "production": false
+    },
+    "generation_method": "synthetic_fixture_authoring",
+    "sbom_format": "CycloneDX JSON (sample-shaped, not a full tooling export guarantee)",
+    "sbom_tool_name": "witnessops-sample-sbom-generator",
+    "sbom_tool_version": "0.1.0-sample",
+    "sbom_author": "WitnessOps Sample SBOM Author",
+    "component_producer": "Sample Component Producer LLC",
+    "scope_notes": [
+      "Covers a tiny synthetic application and three sample libraries only.",
+      "Does not represent a full monorepo, container image, SaaS multi-tenant surface, or AI model stack.",
+      "Hashes and licenses for gap-demo components are intentionally incomplete to exercise the checklist."
+    ]
+  },
+  "cisa_reference": {
+    "title": "2026 Minimum Elements for a Software Bill of Materials (SBOM)",
+    "publisher": "CISA with U.S. and international partners",
+    "published": "2026-07-29",
+    "resource_url": "https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom",
+    "news_url": "https://www.cisa.gov/news-events/news/cisa-and-partners-unveil-updated-software-bill-materials-resource-improves-transparency-security-and",
+    "relationship_to_sample": "Referenced as the public minimum-elements baseline this sample checklist maps against. The sample does not certify compliance with CISA guidance."
+  }
+}

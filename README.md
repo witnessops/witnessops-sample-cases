@@ -29,6 +29,7 @@ privileged-access-approval/fail-scope-mismatch
 sample-cases/ai-agent-action-proof-run
 sample-cases/proof-of-record-pipeline
 sample-cases/phone-security-proof-pack
+sample-cases/sbom-cisa-2026-minimum-elements
 ```
 
 ## Sample-case boundary

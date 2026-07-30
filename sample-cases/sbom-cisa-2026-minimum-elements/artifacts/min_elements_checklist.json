@@ -1,0 +1,134 @@
+{
+  "schema": "witnessops.sbom.cisa_2026_min_elements_checklist.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "checked_at": "2026-07-30T00:00:00Z",
+  "baseline": {
+    "name": "CISA 2026 Minimum Elements for a Software Bill of Materials (SBOM)",
+    "replaces": "NTIA 2021 Minimum Elements for an SBOM (as stated by CISA)",
+    "resource_url": "https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom"
+  },
+  "status_vocabulary": {
+    "present": "Field or practice is represented in the synthetic sample SBOM or generation context.",
+    "partial": "Some components or document-level fields are present; at least one intentional sample gap remains.",
+    "missing": "Not represented in this sample package.",
+    "unknown": "Cannot be decided from sample artifacts alone."
+  },
+  "document_level_elements": [
+    {
+      "element": "SBOM Author",
+      "cisa_note": "Updated naming from Author of SBOM Data (NTIA 2021).",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/synthetic_sbom.cdx.json#metadata.authors",
+        "artifacts/generation_context.json#sbom_generation_context.sbom_author"
+      ]
+    },
+    {
+      "element": "Timestamp",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/synthetic_sbom.cdx.json#metadata.timestamp"
+      ]
+    },
+    {
+      "element": "SBOM Tool Name",
+      "cisa_note": "Called out among new/refined 2026 minimum elements in the public release summary.",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/synthetic_sbom.cdx.json#metadata.tools",
+        "artifacts/generation_context.json#sbom_generation_context.sbom_tool_name"
+      ]
+    },
+    {
+      "element": "SBOM Generation Context",
+      "cisa_note": "Called out among new/refined 2026 minimum elements in the public release summary.",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/generation_context.json"
+      ]
+    },
+    {
+      "element": "Machine-processable SBOM format",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/synthetic_sbom.cdx.json#bomFormat"
+      ],
+      "notes": "Sample uses a CycloneDX-shaped JSON document. This is not an assertion that every tool export path is supported."
+    }
+  ],
+  "component_level_elements": [
+    {
+      "element": "Component Name",
+      "status": "present",
+      "coverage": "all_sample_components"
+    },
+    {
+      "element": "Component Version",
+      "cisa_note": "Updated naming from Version of the Component (NTIA 2021).",
+      "status": "present",
+      "coverage": "all_sample_components"
+    },
+    {
+      "element": "Component Producer",
+      "cisa_note": "Updated naming from Supplier Name (NTIA 2021).",
+      "status": "present",
+      "coverage": "all_sample_components",
+      "evidence_field": "publisher"
+    },
+    {
+      "element": "Unique Component Identifier",
+      "status": "present",
+      "coverage": "all_sample_components",
+      "evidence_field": "bom-ref / purl-shaped string"
+    },
+    {
+      "element": "Dependency Relationship",
+      "status": "present",
+      "evidence_refs": [
+        "artifacts/synthetic_sbom.cdx.json#dependencies"
+      ]
+    },
+    {
+      "element": "Component Hash Algorithm",
+      "cisa_note": "Called out among new/refined 2026 minimum elements in the public release summary.",
+      "status": "partial",
+      "coverage": "present_on_root_and_example_lib_and_gap_demo_lib; missing_on_license_only_lib",
+      "gaps": [
+        {
+          "component": "pkg:npm/license-only-lib@2.0.1",
+          "issue": "no hashes array"
+        }
+      ]
+    },
+    {
+      "element": "Component License",
+      "cisa_note": "Called out among new/refined 2026 minimum elements in the public release summary.",
+      "status": "partial",
+      "coverage": "present_on_root_example_lib_and_license_only_lib; missing_on_gap_demo_lib",
+      "gaps": [
+        {
+          "component": "pkg:npm/gap-demo-lib@0.9.0",
+          "issue": "no licenses array"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "document_level_present": 5,
+    "document_level_partial": 0,
+    "document_level_missing": 0,
+    "component_level_present": 5,
+    "component_level_partial": 2,
+    "component_level_missing": 0,
+    "intentional_sample_gaps": 2,
+    "overall": "partial_with_named_gaps"
+  },
+  "not_evaluated_here": [
+    "Vulnerability exploitability / VEX",
+    "Known Exploited Vulnerabilities (KEV) mapping",
+    "Full AI-SBOM or SaaS multi-tenant element extensions",
+    "Live build pipeline fidelity",
+    "Supplier honesty or source integrity beyond stated sample hashes",
+    "Legal or federal compliance certification"
+  ]
+}

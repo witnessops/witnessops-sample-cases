@@ -75,6 +75,20 @@ sample-cases/
     CHALLENGE_PATH.md
     MANIFEST.sha256
     artifacts/device_check_summary.md
+  sbom-cisa-2026-minimum-elements/
+    README.md
+    BUYER_WALKTHROUGH.md
+    AUTHORITY_MAP.json
+    ACTION_BOUNDARY.json
+    EVIDENCE_MANIFEST.json
+    RECEIPT.json
+    VERIFY_RESULT.json
+    SAMPLE_DELIVERABLE_PLAN.md
+    CHALLENGE_PATH.md
+    MANIFEST.sha256
+    artifacts/synthetic_sbom.cdx.json
+    artifacts/generation_context.json
+    artifacts/min_elements_checklist.json
 
 docs/
   how-to-verify-sample.md

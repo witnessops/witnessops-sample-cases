@@ -1,0 +1,77 @@
+{
+  "schema": "witnessops.sbom.verify_result.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "checked_at": "2026-07-30T00:00:00Z",
+  "result": "pass_with_sample_limitations",
+  "checks": [
+    {
+      "name": "synthetic_sbom_hash_matches_manifest",
+      "expected": "sha256:e9122b03036c237a78274b7c956bd0a7d12b2c666f09bc95e7c201221c52b5e3",
+      "observed": "sha256:e9122b03036c237a78274b7c956bd0a7d12b2c666f09bc95e7c201221c52b5e3",
+      "passed": true
+    },
+    {
+      "name": "generation_context_hash_matches_manifest",
+      "expected": "sha256:cce79d4b322c69a09e55fca7b3f50833de5e2ff0250877b499e79780b4739366",
+      "observed": "sha256:cce79d4b322c69a09e55fca7b3f50833de5e2ff0250877b499e79780b4739366",
+      "passed": true
+    },
+    {
+      "name": "min_elements_checklist_hash_matches_manifest",
+      "expected": "sha256:f729dfa09751b6bed5e78a3d3645ae21900ddf43a1fad5a874767cce8baec775",
+      "observed": "sha256:f729dfa09751b6bed5e78a3d3645ae21900ddf43a1fad5a874767cce8baec775",
+      "passed": true
+    },
+    {
+      "name": "evidence_manifest_id_matches_receipt",
+      "expected": "evidence_manifest_sample_sbom_cisa_2026_001",
+      "observed": "evidence_manifest_sample_sbom_cisa_2026_001",
+      "passed": true
+    },
+    {
+      "name": "receipt_declares_sample_only_boundary",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "name": "signature_boundary_is_sample_declared",
+      "expected": "simulated",
+      "observed": "simulated",
+      "passed": true
+    },
+    {
+      "name": "checklist_names_intentional_component_gaps",
+      "expected": 2,
+      "observed": 2,
+      "passed": true
+    }
+  ],
+  "trust_boundary": {
+    "accepted_inputs": [
+      "local sample bundle files",
+      "sample manifest entries",
+      "synthetic SBOM and generation context",
+      "sample CISA 2026 minimum-elements checklist"
+    ],
+    "not_verified_here": [
+      "CISA or federal compliance certification",
+      "vulnerability status",
+      "KEV mapping",
+      "exploitability",
+      "live build pipeline fidelity",
+      "supplier honesty",
+      "production signer custody"
+    ]
+  },
+  "verification_result": {
+    "scope": "local_sample_bundle_only",
+    "status": "valid_sample"
+  },
+  "verified_mechanism": [
+    "SHA-256 over local sample files",
+    "receipt reference checks",
+    "sample-only boundary checks",
+    "checklist gap-count consistency check"
+  ]
+}

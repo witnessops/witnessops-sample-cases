@@ -1,0 +1,66 @@
+{
+  "schema": "witnessops.sbom.receipt.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "receipt_id": "sha256:7c1f2e9a4b6d8e0f1a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f7081",
+  "receipt_type": "sbom_cisa_2026_min_elements_package_check",
+  "issued_at": "2026-07-30T00:00:00Z",
+  "issuer": {
+    "mode": "sample_case",
+    "name": "WitnessOps"
+  },
+  "action": {
+    "class": "sample_sbom_cisa_2026_min_elements_review",
+    "name": "sample_sbom_minimum_elements_package_check",
+    "production": false,
+    "system_touched": "sample_sbom_cisa_2026_outputs"
+  },
+  "authority": {
+    "action_boundary": "ACTION_BOUNDARY.json",
+    "authority_gate": "sample.sbom.cisa_2026.min_elements.v1",
+    "authority_map": "AUTHORITY_MAP.json",
+    "decision": "recorded"
+  },
+  "claim": "One synthetic SBOM package was checked against a CISA 2026 minimum-elements checklist with document-level fields present and two intentional component-level gaps named.",
+  "evidence": {
+    "challenge_path": "CHALLENGE_PATH.md",
+    "synthetic_sbom": "artifacts/synthetic_sbom.cdx.json",
+    "generation_context": "artifacts/generation_context.json",
+    "min_elements_checklist": "artifacts/min_elements_checklist.json",
+    "evidence_manifest_id": "evidence_manifest_sample_sbom_cisa_2026_001",
+    "hash_manifest": "MANIFEST.sha256",
+    "manifest": "EVIDENCE_MANIFEST.json",
+    "sample_deliverable_plan": "SAMPLE_DELIVERABLE_PLAN.md"
+  },
+  "result": {
+    "result_summary": "Sample SBOM minimum-elements package files were produced for package-shape, checklist, and local hash-reference inspection. Overall checklist status: partial_with_named_gaps.",
+    "status": "sample_recorded",
+    "checklist_overall": "partial_with_named_gaps",
+    "verifier_result": "VERIFY_RESULT.json"
+  },
+  "signature": {
+    "status": "not_registry_attested",
+    "type": "simulated",
+    "value": "SIMULATED_SIGNATURE_FOR_SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_ONLY"
+  },
+  "verification_boundaries": {
+    "verified": [
+      "required sample files exist",
+      "synthetic SBOM hash matches the evidence manifest entry",
+      "generation context hash matches the evidence manifest entry",
+      "minimum-elements checklist hash matches the evidence manifest entry",
+      "receipt references the evidence manifest, authority map, action boundary, verifier result, deliverable plan, and challenge path",
+      "sample bundle has a SHA-256 manifest"
+    ],
+    "not_verified": [
+      "CISA or federal compliance certification",
+      "vulnerability-free software",
+      "KEV absence",
+      "exploitability conclusions",
+      "source-system honesty",
+      "production deployment",
+      "production signer custody",
+      "live customer SBOM authenticity",
+      "complete AI-SBOM or SaaS multi-tenant coverage"
+    ]
+  }
+}

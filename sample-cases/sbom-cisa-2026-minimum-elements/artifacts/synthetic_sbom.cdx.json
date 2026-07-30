@@ -1,0 +1,122 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:00000000-0000-4000-8000-00000000sbom",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-30T00:00:00Z",
+    "authors": [
+      {
+        "name": "WitnessOps Sample SBOM Author",
+        "email": "sample-sbom-author@example.invalid"
+      }
+    ],
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "witnessops-sample-sbom-generator",
+          "version": "0.1.0-sample"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:generic/sample-app@1.2.0",
+      "name": "sample-app",
+      "version": "1.2.0",
+      "publisher": "Sample Component Producer LLC",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "witnessops:sample",
+        "value": "true"
+      },
+      {
+        "name": "witnessops:generation_context",
+        "value": "artifacts/generation_context.json"
+      },
+      {
+        "name": "cisa:sbom_minimum_elements_reference",
+        "value": "2026 Minimum Elements for a Software Bill of Materials (SBOM)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/example-lib@3.4.5",
+      "name": "example-lib",
+      "version": "3.4.5",
+      "publisher": "Example Producer",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/gap-demo-lib@0.9.0",
+      "name": "gap-demo-lib",
+      "version": "0.9.0",
+      "publisher": "Gap Demo Producer",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/license-only-lib@2.0.1",
+      "name": "license-only-lib",
+      "version": "2.0.1",
+      "publisher": "License Only Producer",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:generic/sample-app@1.2.0",
+      "dependsOn": [
+        "pkg:npm/example-lib@3.4.5",
+        "pkg:npm/gap-demo-lib@0.9.0",
+        "pkg:npm/license-only-lib@2.0.1"
+      ]
+    }
+  ],
+  "notes": [
+    "SYNTHETIC SAMPLE SBOM — not a live customer or production software bill of materials.",
+    "gap-demo-lib intentionally omits license to demonstrate a minimum-elements gap.",
+    "license-only-lib intentionally omits component hash to demonstrate a minimum-elements gap."
+  ]
+}

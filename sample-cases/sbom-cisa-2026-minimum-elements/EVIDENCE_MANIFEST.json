@@ -1,0 +1,73 @@
+{
+  "schema": "witnessops.sbom.evidence_manifest.v1",
+  "sample_id": "SBOM_CISA_2026_MIN_ELEMENTS_SAMPLE_V1",
+  "evidence_manifest_id": "evidence_manifest_sample_sbom_cisa_2026_001",
+  "target_environment": "sample_only",
+  "canonical_payload_hash": "sha256:e9122b03036c237a78274b7c956bd0a7d12b2c666f09bc95e7c201221c52b5e3",
+  "custody": {
+    "capture_boundary": "synthetic_sbom_fixture_authoring",
+    "operator": "witnessops_packager_sample_001",
+    "storage_boundary": "public_sample_case_repository"
+  },
+  "failure_states": [
+    "authorization_missing",
+    "sbom_artifact_missing",
+    "generation_context_missing",
+    "checklist_missing",
+    "artifact_hash_mismatch",
+    "authority_boundary_missing",
+    "receipt_reference_mismatch",
+    "challenge_path_incomplete",
+    "unsupported_compliance_claim"
+  ],
+  "items": [
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "artifacts/synthetic_sbom.cdx.json",
+      "role": "synthetic_sbom",
+      "sha256": "sha256:e9122b03036c237a78274b7c956bd0a7d12b2c666f09bc95e7c201221c52b5e3",
+      "source_uri": "sample://sbom-cisa-2026/synthetic-sbom"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "artifacts/generation_context.json",
+      "role": "sbom_generation_context",
+      "sha256": "sha256:cce79d4b322c69a09e55fca7b3f50833de5e2ff0250877b499e79780b4739366",
+      "source_uri": "sample://sbom-cisa-2026/generation-context"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "artifacts/min_elements_checklist.json",
+      "role": "cisa_2026_min_elements_checklist",
+      "sha256": "sha256:f729dfa09751b6bed5e78a3d3645ae21900ddf43a1fad5a874767cce8baec775",
+      "source_uri": "sample://sbom-cisa-2026/min-elements-checklist"
+    },
+    {
+      "media_type": "text/markdown",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "SAMPLE_DELIVERABLE_PLAN.md",
+      "role": "sample_deliverable_plan",
+      "sha256": "sha256:59343e22d4edd27acc10acce23b61bb0ef2415c237d4ab0a9b5e2f5b2b9554c4",
+      "source_uri": "sample://sbom-cisa-2026/proof-pack-plan"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "AUTHORITY_MAP.json",
+      "role": "authority_map",
+      "sha256": "sha256:31c1de0dd7d46b43c81739a56d35b881e617f705fa6f89afa5e3cf374bd69662",
+      "source_uri": "authority://sample/sbom-cisa-2026/proof-pack/v1"
+    },
+    {
+      "media_type": "application/json",
+      "observed_at": "2026-07-30T00:00:00Z",
+      "path": "ACTION_BOUNDARY.json",
+      "role": "action_boundary",
+      "sha256": "sha256:8b0daa49b29f1dd0f716c537baccadefe120891b17294eaffca07aff4bb22dc4",
+      "source_uri": "boundary://sample/sbom-cisa-2026/action-boundary/v1"
+    }
+  ]
+}
