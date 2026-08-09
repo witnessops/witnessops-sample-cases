@@ -2,36 +2,39 @@
 
 Public sample packages for WitnessOps reviews.
 
-Use these when you want to **inspect an example** before requesting work: what was checked, which files ship, and what the package does **not** prove.
+Use these when you want to **inspect an example** before requesting work: what
+was checked, which files ship, and what the package does **not** prove.
 
 ## For buyers (start here)
 
 1. Open a sample under `sample-cases/`.
-2. Read that package’s `README.md` (situation, inspect, does not prove).
+2. Read that package's `README.md` (situation, inspect, does not prove).
 3. Prefer `BUYER_WALKTHROUGH.md` when present.
 4. Run `shasum -a 256 -c MANIFEST.sha256` from the package directory.
 5. Treat every sample as **synthetic / labelled** — not live customer evidence.
 
-Public web walkthroughs (buyer chrome):
+Public web walkthroughs:
 
 - https://witnessops.com/review/sample-cases
 - AI agent change package, SBOM minimum-elements check, and related examples
 
 ## Authority boundary
 
-This repo presents and organizes sample cases. It does not define schemas, execute production reviews, sign production receipts, or implement the offline verifier.
+This repo presents and organizes sample cases. It does not define schemas,
+execute production reviews, sign production receipts, or implement the
+canonical internal verifier.
 
 | Concern | Owned here? | Notes |
 |---|---:|---|
-| Sample READMEs and buyer walkthroughs | Yes | Situation, inspect, does-not-prove language |
-| Stable sample package paths | Yes | Files exported or authored as public samples |
-| Expected sample verifier outcomes | Yes | Sample-scoped results only |
-| Redaction / sample-boundary notes | Yes | Why evidence is synthetic |
-| Proof-engine source | No | `witnessops-proof-engine` |
-| Offline verifier | No | `witnessops-verifier` |
-| Contract schemas | No | `witnessops-contracts` |
-| Key registry | No | `witnessops-key-registry` |
-| Private keys or live customer evidence | Never | Must not be committed here |
+| Sample READMEs and buyer walkthroughs | Yes | Situation, inspection, and does-not-prove language. |
+| Stable sample package paths | Yes | Files exported or authored as public samples. |
+| Expected sample verifier outcomes | Yes | Sample-scoped results only. |
+| Redaction and sample boundaries | Yes | Explains why evidence is synthetic. |
+| Proof-engine source | No | `witnessops-proof-engine`. |
+| Canonical internal verifier | No | `witnessops-verifier`; supported public distribution remains unresolved. |
+| Contract schemas | No | `witnessops-contracts`. |
+| Key registry | No | `witnessops-key-registry`. |
+| Private keys or live customer evidence | Never | Must not be committed here. |
 
 ## Current sample packages
 
@@ -45,7 +48,8 @@ privileged-access-approval/partial-missing-removal
 privileged-access-approval/fail-scope-mismatch
 ```
 
-Web presentation is selective: not every GitHub package has a marketing page. Prefer the site index for buyer entry; use this repo for file-level inspection.
+Web presentation is selective: not every GitHub package has a marketing page.
+Prefer the site index for buyer entry; use this repo for file-level inspection.
 
 ## What samples can show
 
@@ -75,9 +79,25 @@ cd sample-cases/<package>
 shasum -a 256 -c MANIFEST.sha256
 ```
 
-Where a full offline verifier is used for imported packages, record the exact command and refs in that package’s docs. Sample signatures are often **simulated**.
+Where a full offline verifier is used for imported packages, record the exact
+command and refs in that package's docs. Sample signatures are often simulated.
+
+## Controlled publication provenance
+
+The manual `.github/workflows/publish-sample-packages.yml` path regenerates
+the three `privileged-access-approval/*/package` directories using exact,
+pinned Proof Engine, Verifier, and Contracts commits. It asserts each resolved
+checkout HEAD and commits `PUBLICATION_PROVENANCE.json` atomically with the
+generated package changes.
+
+The provenance record applies only to the package paths it names and only to
+the publication commit that contains it. It does not retroactively attribute
+component revisions to existing packages committed before the record existed.
+Those historical component revisions are operationally unknown until the
+packages are regenerated through the controlled workflow.
 
 ## Publication rule
 
-Do not commit secrets, customer data, production evidence, or private keys.  
-If package files change, update `MANIFEST.sha256` and any hash references in the same change.
+Do not commit secrets, customer data, production evidence, or private keys.
+If package files change, update the relevant hash records and publication
+provenance in the same change.
