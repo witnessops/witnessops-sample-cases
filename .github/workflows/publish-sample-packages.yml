@@ -15,8 +15,8 @@ jobs:
   publish-sample-packages:
     runs-on: ubuntu-latest
     env:
-      PROOF_ENGINE_SHA: 6511d64590e877e2285cac92c9cf4610396ea3a5
-      VERIFIER_SHA: a279a56226972fc3a15ea960f6e1150d2e16df85
+      PROOF_ENGINE_SHA: 24c13c96bc58ebfb51c159e466ba672f44b4d426
+      VERIFIER_SHA: c85fe398eaba915304f71d366e20fc8b144f4d33
       CONTRACTS_SHA: b344ed1610a07fbb8a03d5eff9480765610b89a0
     steps:
       - name: Checkout sample cases
@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: witnessops/witnessops-proof-engine
-          ref: 6511d64590e877e2285cac92c9cf4610396ea3a5
+          ref: 24c13c96bc58ebfb51c159e466ba672f44b4d426
           path: proof-engine
           persist-credentials: false
 
@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: witnessops/witnessops-verifier
-          ref: a279a56226972fc3a15ea960f6e1150d2e16df85
+          ref: c85fe398eaba915304f71d366e20fc8b144f4d33
           path: witnessops-verifier
           persist-credentials: false
 
