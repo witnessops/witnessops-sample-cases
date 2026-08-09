@@ -14,6 +14,10 @@ permissions:
 jobs:
   publish-sample-packages:
     runs-on: ubuntu-latest
+    env:
+      PROOF_ENGINE_SHA: 6511d64590e877e2285cac92c9cf4610396ea3a5
+      VERIFIER_SHA: a279a56226972fc3a15ea960f6e1150d2e16df85
+      CONTRACTS_SHA: b344ed1610a07fbb8a03d5eff9480765610b89a0
     steps:
       - name: Checkout sample cases
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -25,19 +29,31 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: witnessops/witnessops-proof-engine
+          ref: 6511d64590e877e2285cac92c9cf4610396ea3a5
           path: proof-engine
+          persist-credentials: false
 
       - name: Checkout verifier
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: witnessops/witnessops-verifier
+          ref: a279a56226972fc3a15ea960f6e1150d2e16df85
           path: witnessops-verifier
+          persist-credentials: false
 
       - name: Checkout contracts
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: witnessops/witnessops-contracts
+          ref: b344ed1610a07fbb8a03d5eff9480765610b89a0
           path: witnessops-contracts
+          persist-credentials: false
+
+      - name: Assert pinned component revisions
+        run: |
+          test "$(git -C proof-engine rev-parse HEAD)" = "$PROOF_ENGINE_SHA"
+          test "$(git -C witnessops-verifier rev-parse HEAD)" = "$VERIFIER_SHA"
+          test "$(git -C witnessops-contracts rev-parse HEAD)" = "$CONTRACTS_SHA"
 
       - name: Set up Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -81,6 +97,70 @@ jobs:
       - name: Import exported packages into sample cases
         working-directory: sample-cases
         run: python scripts/import_sample_packages.py --source-root ../proof-engine/dist/sample-packages --repo-root .
+
+      - name: Record exact publication provenance
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          components = [
+              {
+                  "repository": "witnessops/witnessops-proof-engine",
+                  "checkout": "proof-engine",
+                  "expected_commit": os.environ["PROOF_ENGINE_SHA"],
+              },
+              {
+                  "repository": "witnessops/witnessops-verifier",
+                  "checkout": "witnessops-verifier",
+                  "expected_commit": os.environ["VERIFIER_SHA"],
+              },
+              {
+                  "repository": "witnessops/witnessops-contracts",
+                  "checkout": "witnessops-contracts",
+                  "expected_commit": os.environ["CONTRACTS_SHA"],
+              },
+          ]
+          recorded_components = []
+          for component in components:
+              actual_commit = subprocess.check_output(
+                  ["git", "-C", component["checkout"], "rev-parse", "HEAD"],
+                  text=True,
+              ).strip()
+              if actual_commit != component["expected_commit"]:
+                  raise SystemExit(
+                      f'{component["repository"]}: expected '
+                      f'{component["expected_commit"]}, got {actual_commit}'
+                  )
+              recorded_components.append(
+                  {
+                      "repository": component["repository"],
+                      "commit": actual_commit,
+                  }
+              )
+
+          provenance = {
+              "provenance_version": "witnessops.sample-publication-provenance.v1",
+              "generated_by": ".github/workflows/publish-sample-packages.yml",
+              "component_revisions": recorded_components,
+              "published_package_paths": [
+                  "privileged-access-approval/pass/package",
+                  "privileged-access-approval/partial-missing-removal/package",
+                  "privileged-access-approval/fail-scope-mismatch/package",
+              ],
+              "limitations": [
+                  "Records component revisions used by this publication only.",
+                  "Does not establish production signing or key custody.",
+                  "Does not attribute packages committed before this record existed.",
+              ],
+          }
+          Path("sample-cases/PUBLICATION_PROVENANCE.json").write_text(
+              json.dumps(provenance, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
 
       - name: Validate imported sample cases
         working-directory: sample-cases
@@ -148,16 +228,17 @@ jobs:
             exit 1
           fi
 
-      - name: Commit imported packages
+      - name: Commit imported packages and provenance
         working-directory: sample-cases
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add privileged-access-approval/pass/package \
                   privileged-access-approval/partial-missing-removal/package \
-                  privileged-access-approval/fail-scope-mismatch/package
+                  privileged-access-approval/fail-scope-mismatch/package \
+                  PUBLICATION_PROVENANCE.json
           if git diff --cached --quiet; then
-            echo "No package changes to publish."
+            echo "No package or provenance changes to publish."
           else
             git commit -m "Publish generated privileged access sample packages"
             git push origin HEAD:${{ inputs.target_branch }}
