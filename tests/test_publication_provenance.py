@@ -5,8 +5,8 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "publish-sample-packages.yml"
 
 PINNED_COMPONENTS = {
-    "witnessops/witnessops-proof-engine": "6511d64590e877e2285cac92c9cf4610396ea3a5",
-    "witnessops/witnessops-verifier": "a279a56226972fc3a15ea960f6e1150d2e16df85",
+    "witnessops/witnessops-proof-engine": "24c13c96bc58ebfb51c159e466ba672f44b4d426",
+    "witnessops/witnessops-verifier": "c85fe398eaba915304f71d366e20fc8b144f4d33",
     "witnessops/witnessops-contracts": "b344ed1610a07fbb8a03d5eff9480765610b89a0",
 }
 
