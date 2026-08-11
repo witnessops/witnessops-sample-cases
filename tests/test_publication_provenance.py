@@ -1,10 +1,13 @@
+import importlib.util
 from pathlib import Path
-
-from scripts import publish_sample_packages_manual as publication
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUAL_PUBLISHER = ROOT / "scripts" / "publish_sample_packages_manual.py"
+SPEC = importlib.util.spec_from_file_location("publish_sample_packages_manual", MANUAL_PUBLISHER)
+assert SPEC is not None and SPEC.loader is not None
+publication = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(publication)
 ACTIONS_PUBLISHER = ROOT / ".github" / "workflows" / "publish-sample-packages.yml"
 
 EXPECTED_COMPONENTS = {
