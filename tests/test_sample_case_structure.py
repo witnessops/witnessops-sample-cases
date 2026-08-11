@@ -72,16 +72,18 @@ def test_publication_policy_contains_required_gate_language():
         assert marker in policy, f"publication policy missing marker: {marker}"
 
 
-def test_publish_workflow_doc_contains_required_gate_language():
+def test_manual_publication_doc_contains_required_gate_language():
     doc = (ROOT / "docs" / "publish-sample-packages-workflow.md").read_text(encoding="utf-8")
     for marker in [
-        "workflow_dispatch",
+        "Manual Sample Package Publication",
+        "scripts/publish_sample_packages_manual.py",
         "Publication sequence",
         "Publication gate",
+        "stop without committing or pushing",
         "verification_result.status = valid",
         "package_index.verification_result_source = witnessops_verifier",
     ]:
-        assert marker in doc, f"publish workflow doc missing marker: {marker}"
+        assert marker in doc, f"manual publication doc missing marker: {marker}"
 
 
 def test_expected_sample_case_directories_exist():
