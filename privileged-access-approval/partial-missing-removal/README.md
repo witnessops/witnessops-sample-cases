@@ -1,5 +1,10 @@
 # Sample Case: Privileged Access Approval — Partial Missing Removal
 
+> **Status: PLANNED / DOCUMENTATION ONLY**
+>
+> `package/` does not contain a published sample package. The outcomes below
+> are expectations for a future generated fixture, not observed verifier results.
+
 ## Scenario
 
 A privileged access event has request, approval, authority, and execution evidence, but lacks portable proof that access was removed or expired.
@@ -11,7 +16,7 @@ outcome = partial
 failure_states includes missing_removal_proof
 ```
 
-## Expected package verification result
+## Intended package verification result after publication
 
 ```text
 status = valid

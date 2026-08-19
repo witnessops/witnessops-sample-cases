@@ -1,9 +1,10 @@
 schema: witnessops.sample_cases_manifest.v1
-manifest_purpose: stable public index for sample-case receipt canary
+manifest_purpose: complete public package inventory and sample-case receipt canary
+inventory_scope: immediate child directories under sample-cases
 
 authority_boundary:
   owns:
-    - sample-case path inventory
+    - complete published sample-package path inventory
     - public sample-case organization signal
     - CI receipt canary input
   does_not_own:
@@ -15,27 +16,26 @@ authority_boundary:
     - live customer evidence
 
 sample_cases:
-  - id: privileged-access-approval-pass
-    path: privileged-access-approval/pass
-    evidence_class: synthetic_sample
-  - id: privileged-access-approval-partial-missing-removal
-    path: privileged-access-approval/partial-missing-removal
-    evidence_class: synthetic_sample
-  - id: privileged-access-approval-fail-scope-mismatch
-    path: privileged-access-approval/fail-scope-mismatch
-    evidence_class: synthetic_sample
   - id: ai-agent-action-proof-run
     path: sample-cases/ai-agent-action-proof-run
     evidence_class: synthetic_sample
+    publication_state: complete
   - id: content-commitment-receipt
     path: sample-cases/content-commitment-receipt
     evidence_class: synthetic_sample
+    publication_state: complete
   - id: phone-security-proof-pack
     path: sample-cases/phone-security-proof-pack
     evidence_class: synthetic_sample
+    publication_state: complete
+  - id: proof-of-record-pipeline
+    path: sample-cases/proof-of-record-pipeline
+    evidence_class: synthetic_sample
+    publication_state: complete
   - id: sbom-cisa-2026-minimum-elements
     path: sample-cases/sbom-cisa-2026-minimum-elements
     evidence_class: synthetic_sample
+    publication_state: complete
 
 receipt_canary:
   diff_receipt_payload: receipts/sample-cases-manifest.diff

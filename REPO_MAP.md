@@ -27,10 +27,11 @@ private keys
 live customer evidence
 ```
 
-## Planned structure
+## Published and planned structure
 
 ```text
 privileged-access-approval/
+  # planned documentation only; package directories are empty
   README.md
   pass/
     README.md
@@ -119,10 +120,10 @@ tests/
 ## First gate
 
 ```text
-sample case directories exist
-sample README files exist
-sample package directories are declared but may be empty until package import
-expected outcomes are documented
+published sample directories exactly match SAMPLE_CASES_MANIFEST.v1.yaml
+published sample README files exist
+planned privileged-access package directories contain only .gitkeep
+planned expected outcomes are explicitly marked as unobserved
 no private-key indicators appear
 no live customer evidence markers appear
 ```

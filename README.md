@@ -44,10 +44,27 @@ sample-cases/content-commitment-receipt         # synthetic byte-commitment life
 sample-cases/sbom-cisa-2026-minimum-elements    # full package — SBOM min-elements check
 sample-cases/phone-security-proof-pack          # full package — phone security shape
 sample-cases/proof-of-record-pipeline           # full package — record pipeline shape
-privileged-access-approval/pass                 # outcome demo (pass)
+```
+
+`sample-cases/SAMPLE_CASES_MANIFEST.v1.yaml` is the complete inventory of
+published package directories under `sample-cases/`. Repository tests require
+the manifest and directory inventory to match exactly.
+
+## Planned sample packages
+
+The following paths contain scenario documentation only. Their `package/`
+directories are intentionally empty apart from `.gitkeep`, so they are not
+published sample packages and are not included in the complete-package
+manifest:
+
+```text
+privileged-access-approval/pass
 privileged-access-approval/partial-missing-removal
 privileged-access-approval/fail-scope-mismatch
 ```
+
+They become current only after the documented manual publication process adds
+complete artifacts and a reviewed change updates their status and inventory.
 
 Web presentation is selective: not every GitHub package has a marketing page.
 Prefer the site index for buyer entry; use this repo for file-level inspection.

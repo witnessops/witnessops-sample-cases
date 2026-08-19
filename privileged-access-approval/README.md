@@ -1,22 +1,29 @@
-# Privileged Access Approval Sample Cases
+# Privileged Access Approval — Planned Sample Cases
 
-This directory contains stable sample cases for the `privileged_access_approval` workflow.
+> **Status: PLANNED / DOCUMENTATION ONLY**
+>
+> These scenarios do not yet contain published sample packages. Each
+> `package/` directory is intentionally empty apart from `.gitkeep`.
+
+This directory describes planned sample cases for the
+`privileged_access_approval` workflow.
 
 ## Workflow question
 
 > Can you prove that privileged access was approved, granted as approved, bounded by time, and removed when it should have been?
 
-## Sample cases
+## Planned cases
 
-| Case | Workflow outcome | Package verification status | Purpose |
+| Case | Intended workflow outcome | Current package status | Purpose |
 |---|---|---|---|
-| `pass` | `pass` | `valid` after verifier run | Shows a complete approval-to-removal proof path. |
-| `partial-missing-removal` | `partial` | `valid` after verifier run | Shows a package that verifies, while the workflow result declares missing removal proof. |
-| `fail-scope-mismatch` | `fail` | `valid` after verifier run | Shows a package that verifies, while the workflow result declares a scope mismatch. |
+| `pass` | `pass` | Not published | Intended to show a complete approval-to-removal proof path. |
+| `partial-missing-removal` | `partial` | Not published | Intended to show missing removal proof. |
+| `fail-scope-mismatch` | `fail` | Not published | Intended to show a scope mismatch. |
 
 ## Important distinction
 
-A workflow result can be `fail` while the package verification status is `valid`.
+After packages are generated and published, a workflow result may be `fail`
+while the package verification status is `valid`.
 
 ```text
 workflow outcome
@@ -34,4 +41,5 @@ Packages should be exported from `witnessops-proof-engine` and copied into each 
 package/
 ```
 
-Until packages are imported, each case includes README documentation and expected result boundaries.
+Until packages are imported through a reviewed publication change, each case is
+documentation only and must not be described as verified, complete, or current.
