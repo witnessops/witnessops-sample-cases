@@ -1,0 +1,4 @@
+{
+  "name": "witnessops-sample-cases",
+  "install": "pip install -r requirements-dev.txt"
+}
