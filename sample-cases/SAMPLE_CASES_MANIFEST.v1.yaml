@@ -27,6 +27,9 @@ sample_cases:
   - id: ai-agent-action-proof-run
     path: sample-cases/ai-agent-action-proof-run
     evidence_class: synthetic_sample
+  - id: content-commitment-receipt
+    path: sample-cases/content-commitment-receipt
+    evidence_class: synthetic_sample
   - id: phone-security-proof-pack
     path: sample-cases/phone-security-proof-pack
     evidence_class: synthetic_sample

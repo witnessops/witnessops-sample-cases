@@ -43,6 +43,20 @@ privileged-access-approval/
     package/
 
 sample-cases/
+  content-commitment-receipt/
+    README.md
+    CLAIM_BOUNDARY.md
+    FORMAT.md
+    SOURCE_NOTE.md
+    MANIFEST.sha256
+    lifecycle/
+      01-pre-disclosure/
+      02-public-commitment/
+      03-disclosure/
+    schema/
+    tools/
+    scripts/
+    tests/
   ai-agent-action-proof-run/
     README.md
     AUTHORITY_MAP.json

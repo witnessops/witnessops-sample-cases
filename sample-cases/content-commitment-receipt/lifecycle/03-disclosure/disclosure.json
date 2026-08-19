@@ -1,0 +1,7 @@
+{
+  "disclosure_type": "sample_commitment_opening",
+  "disclosure_version": "1.0-sample",
+  "nonce": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "nonce_encoding": "hex",
+  "receipt_id": "wo-sample-cc-8669ba4fb5ef256fb791eb91"
+}
