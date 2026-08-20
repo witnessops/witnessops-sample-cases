@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Synthetic sample-local fixture. This is not a canonical witnessops-contracts schema.",
+  "title": "Synthetic Content Commitment Receipt Sample v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sample_status",
+    "receipt_version",
+    "receipt_type",
+    "receipt_id",
+    "commitment",
+    "artifact",
+    "opening_requirements",
+    "time_evidence",
+    "claims",
+    "generator"
+  ],
+  "properties": {
+    "sample_status": { "const": "synthetic_noncanonical" },
+    "receipt_version": { "const": "1.0-sample" },
+    "receipt_type": { "const": "sample_content_commitment" },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^wo-sample-cc-[0-9a-f]{24}$"
+    },
+    "commitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scheme", "digest_algorithm", "value"],
+      "properties": {
+        "scheme": { "const": "WITNESSOPS-SAMPLE-CONTENT-COMMITMENT-V1" },
+        "digest_algorithm": { "const": "SHA-256" },
+        "value": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "byte_length"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 255 },
+        "byte_length": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "opening_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nonce_bytes", "nonce_encoding", "nonce_in_receipt"],
+      "properties": {
+        "nonce_bytes": { "const": 32 },
+        "nonce_encoding": { "const": "hex" },
+        "nonce_in_receipt": { "const": false }
+      }
+    },
+    "time_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claimed_created_at", "external_anchor"],
+      "properties": {
+        "claimed_created_at": { "type": "string", "format": "date-time" },
+        "external_anchor": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "description": "Presence is not evidence of successful anchor verification."
+            }
+          ]
+        }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_after_successful_opening", "not_supported_by_this_sample"],
+      "properties": {
+        "supported_after_successful_opening": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "not_supported_by_this_sample": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      }
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+WITNESSOPS SYNTHETIC SAMPLE — NOT A CUSTOMER CONTRACT
+
+On 19 August 2026, Example Customer and Example Provider agreed to a fixed fee of EUR 1,900 excluding VAT for one bounded review of one authorised public-facing system.
+
+This file exists only to demonstrate byte-level content commitment and later disclosure. Its statements are fictional. It is not real customer evidence, and the commitment does not make its statements true.

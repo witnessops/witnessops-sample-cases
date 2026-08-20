@@ -6,6 +6,10 @@ This guide explains how to verify a sample package in this repository using `wit
 
 ## Inputs
 
+The command below applies only after the privileged-access package has been
+generated and published. The checked-in `privileged-access-approval/*/package`
+directories are currently planned placeholders and are not verifiable packages.
+
 ```text
 witnessops-sample-cases/<sample>/package/
 witnessops-verifier/

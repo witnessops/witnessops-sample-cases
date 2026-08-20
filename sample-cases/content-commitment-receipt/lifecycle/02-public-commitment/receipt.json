@@ -1,0 +1,43 @@
+{
+  "artifact": {
+    "byte_length": 434,
+    "label": "example-agreement.txt"
+  },
+  "claims": {
+    "not_supported_by_this_sample": [
+      "truth",
+      "authorship",
+      "authority",
+      "confidentiality",
+      "first_creation_time",
+      "independent_timestamp",
+      "artifact_safety",
+      "canonical_verifier_acceptance"
+    ],
+    "supported_after_successful_opening": [
+      "The supplied artifact bytes and nonce reproduce this synthetic commitment under the declared sample scheme."
+    ]
+  },
+  "commitment": {
+    "digest_algorithm": "SHA-256",
+    "scheme": "WITNESSOPS-SAMPLE-CONTENT-COMMITMENT-V1",
+    "value": "8669ba4fb5ef256fb791eb91484a63ecfd5b26521e7a89e5e815ac04ec5877ff"
+  },
+  "generator": {
+    "name": "witnessops-sample-cases/content-commitment-receipt",
+    "version": "0.1.0-sample"
+  },
+  "opening_requirements": {
+    "nonce_bytes": 32,
+    "nonce_encoding": "hex",
+    "nonce_in_receipt": false
+  },
+  "receipt_id": "wo-sample-cc-8669ba4fb5ef256fb791eb91",
+  "receipt_type": "sample_content_commitment",
+  "receipt_version": "1.0-sample",
+  "sample_status": "synthetic_noncanonical",
+  "time_evidence": {
+    "claimed_created_at": "2026-08-19T05:30:00Z",
+    "external_anchor": null
+  }
+}

@@ -1,5 +1,10 @@
 # Sample Case: Privileged Access Approval — Pass
 
+> **Status: PLANNED / DOCUMENTATION ONLY**
+>
+> `package/` does not contain a published sample package. The outcomes below
+> are expectations for a future generated fixture, not observed verifier results.
+
 ## Scenario
 
 A privileged access event has complete evidence for:
@@ -19,7 +24,7 @@ outcome = pass
 failure_states = []
 ```
 
-## Expected package verification result
+## Intended package verification result after publication
 
 ```text
 status = valid

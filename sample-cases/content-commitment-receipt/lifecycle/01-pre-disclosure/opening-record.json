@@ -1,0 +1,9 @@
+{
+  "artifact_sha256_operator_diagnostic": "4cfcff508ffc265e3f15d3baf819104e76ede633138068a421f709266027f1cb",
+  "nonce": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "nonce_encoding": "hex",
+  "opening_record_type": "sample_commitment_opening_record",
+  "opening_record_version": "1.0-sample",
+  "receipt_id": "wo-sample-cc-8669ba4fb5ef256fb791eb91",
+  "warning": "WITHHOLD UNTIL INTENTIONAL DISCLOSURE IN A REAL RUN; PUBLISHED HERE ONLY AS SYNTHETIC SAMPLE DATA"
+}

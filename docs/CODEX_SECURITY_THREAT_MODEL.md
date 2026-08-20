@@ -17,12 +17,17 @@ It owns:
 - public explanation of what each sample does and does not prove
 - sample package material copied from authorized generation flows
 
-Current sample paths include:
+Published sample paths include the complete directories under `sample-cases/`,
+as indexed by `sample-cases/SAMPLE_CASES_MANIFEST.v1.yaml`.
+
+Planned documentation-only paths include:
 
 - `privileged-access-approval/pass`
 - `privileged-access-approval/partial-missing-removal`
 - `privileged-access-approval/fail-scope-mismatch`
-- `sample-cases/ai-agent-action-proof-run`
+
+The planned paths are not published packages until generated artifacts replace
+their `.gitkeep` placeholders through the reviewed publication process.
 
 ## Out of scope
 

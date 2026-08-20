@@ -1,5 +1,10 @@
 # Sample Case: Privileged Access Approval — Fail Scope Mismatch
 
+> **Status: PLANNED / DOCUMENTATION ONLY**
+>
+> `package/` does not contain a published sample package. The outcomes below
+> are expectations for a future generated fixture, not observed verifier results.
+
 ## Scenario
 
 A privileged access event has evidence, but the granted access does not match the approved scope.
@@ -18,7 +23,7 @@ outcome = fail
 failure_states includes scope_mismatch
 ```
 
-## Expected package verification result
+## Intended package verification result after publication
 
 ```text
 status = valid

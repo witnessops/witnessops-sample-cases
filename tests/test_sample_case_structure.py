@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AI_AGENT_ACTION_SAMPLE = ROOT / "sample-cases" / "ai-agent-action-proof-run"
 
-EXPECTED_CASES = {
+PLANNED_CASES = {
     "privileged-access-approval/pass": {
         "expected_outcome": "outcome = pass",
         "expected_failure": "failure_states = []",
@@ -19,6 +19,9 @@ EXPECTED_CASES = {
         "expected_failure": "scope_mismatch",
     },
 }
+
+PUBLISHED_SAMPLE_ROOT = ROOT / "sample-cases"
+PUBLISHED_SAMPLE_MANIFEST = PUBLISHED_SAMPLE_ROOT / "SAMPLE_CASES_MANIFEST.v1.yaml"
 
 REQUIRED_DOCS = [
     "README.md",
@@ -86,8 +89,35 @@ def test_manual_publication_doc_contains_required_gate_language():
         assert marker in doc, f"manual publication doc missing marker: {marker}"
 
 
-def test_expected_sample_case_directories_exist():
-    for relative, expectations in EXPECTED_CASES.items():
+def _manifest_sample_paths():
+    paths = []
+    for line in PUBLISHED_SAMPLE_MANIFEST.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if stripped.startswith("path: "):
+            paths.append(stripped.removeprefix("path: "))
+    return paths
+
+
+def test_published_sample_manifest_matches_directories_exactly():
+    manifest_paths = _manifest_sample_paths()
+    directory_paths = sorted(
+        f"sample-cases/{path.name}"
+        for path in PUBLISHED_SAMPLE_ROOT.iterdir()
+        if path.is_dir() and not path.name.startswith(".")
+    )
+
+    assert len(manifest_paths) == len(set(manifest_paths)), "manifest contains duplicate sample paths"
+    assert sorted(manifest_paths) == directory_paths
+
+
+def test_manifest_entries_are_complete_synthetic_samples():
+    manifest = PUBLISHED_SAMPLE_MANIFEST.read_text(encoding="utf-8")
+    assert manifest.count("evidence_class: synthetic_sample") == len(_manifest_sample_paths())
+    assert manifest.count("publication_state: complete") == len(_manifest_sample_paths())
+
+
+def test_planned_sample_case_directories_exist():
+    for relative, expectations in PLANNED_CASES.items():
         case_dir = ROOT / relative
         readme = case_dir / "README.md"
         package_dir = case_dir / "package"
@@ -98,15 +128,17 @@ def test_expected_sample_case_directories_exist():
         content = readme.read_text(encoding="utf-8")
         assert expectations["expected_outcome"] in content
         assert expectations["expected_failure"] in content
+        assert "Status: PLANNED / DOCUMENTATION ONLY" in content
         assert "Package path" in content
 
 
-def test_placeholder_packages_are_marked_until_import():
-    for relative in EXPECTED_CASES:
+def test_planned_packages_are_empty_and_excluded_from_manifest():
+    manifest_paths = set(_manifest_sample_paths())
+    for relative in PLANNED_CASES:
         package_dir = ROOT / relative / "package"
-        gitkeep = package_dir / ".gitkeep"
-        if not (package_dir / "receipt.json").exists():
-            assert gitkeep.exists(), f"empty package directory must include .gitkeep: {relative}/package"
+        contents = {path.name for path in package_dir.iterdir()}
+        assert contents == {".gitkeep"}, f"planned package must remain empty: {relative}/package"
+        assert relative not in manifest_paths
 
 
 def test_ai_agent_action_sample_bundle_exists_and_is_bounded():
