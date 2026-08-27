@@ -49,7 +49,13 @@ jobs:
 
           receipt = json.loads((case / 'RECEIPT.json').read_text(encoding='utf-8'))
           verify_result = json.loads((case / 'VERIFY_RESULT.json').read_text(encoding='utf-8'))
-          assert receipt['signature']['type'] == 'simulated'
-          assert receipt['action']['production'] is False
-          assert verify_result['result'] == 'pass_with_sample_limitations'
+          key_registry = json.loads((case / 'DEMO_KEY_REGISTRY.json').read_text(encoding='utf-8'))
+          assert receipt['receipt_profile'] == 'witnessops.verification_context.v1'
+          assert receipt['workflow_class'] == 'compromised_api_key_rotation'
+          assert receipt['signature']['algorithm'] == 'ed25519'
+          assert receipt['signature']['encoding'] == 'hex'
+          assert len(receipt['signature']['signature']) == 128
+          assert receipt['signature']['public_key_id'] == key_registry['keys'][0]['id']
+          assert key_registry['keys'][0]['purpose'] == 'synthetic_demo_receipts_only'
+          assert verify_result['verdict'] == 'VALID_SYNTHETIC_SPECIMEN'
           PY

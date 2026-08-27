@@ -62,11 +62,21 @@ sample-cases/
     README.md
     AUTHORITY_MAP.json
     ACTION_BOUNDARY.json
+    BUNDLE.wops.json
+    BUYER_WALKTHROUGH.md
+    DEMO_KEY_REGISTRY.json
+    DEMO_PUBLIC_KEY.pem
     EVIDENCE_MANIFEST.json
     RECEIPT.json
     VERIFY_RESULT.json
     CHALLENGE_PATH.md
     MANIFEST.sha256
+    evidence/
+      ALERT.json
+      BEFORE.json
+      EVENTS.ndjson
+      AFTER.json
+      CHECKS.json
   proof-of-record-pipeline/
     README.md
     AUTHORITY_MAP.json

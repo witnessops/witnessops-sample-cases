@@ -39,10 +39,19 @@ REQUIRED_AI_AGENT_ACTION_FILES = [
     "README.md",
     "AUTHORITY_MAP.json",
     "ACTION_BOUNDARY.json",
+    "BUNDLE.wops.json",
+    "BUYER_WALKTHROUGH.md",
+    "CHALLENGE_PATH.md",
+    "DEMO_KEY_REGISTRY.json",
+    "DEMO_PUBLIC_KEY.pem",
     "EVIDENCE_MANIFEST.json",
     "RECEIPT.json",
     "VERIFY_RESULT.json",
-    "CHALLENGE_PATH.md",
+    "evidence/AFTER.json",
+    "evidence/ALERT.json",
+    "evidence/BEFORE.json",
+    "evidence/CHECKS.json",
+    "evidence/EVENTS.ndjson",
     "MANIFEST.sha256",
 ]
 
@@ -149,11 +158,78 @@ def test_ai_agent_action_sample_bundle_exists_and_is_bounded():
     verify_result = json.loads((AI_AGENT_ACTION_SAMPLE / "VERIFY_RESULT.json").read_text(encoding="utf-8"))
     authority_map = json.loads((AI_AGENT_ACTION_SAMPLE / "AUTHORITY_MAP.json").read_text(encoding="utf-8"))
 
-    assert receipt["signature"]["type"] == "simulated"
-    assert receipt["action"]["production"] is False
-    assert "production deployment" in receipt["verification_boundaries"]["not_verified"]
-    assert verify_result["result"] == "pass_with_sample_limitations"
-    assert authority_map["authority_boundary"]["system_touched"]["production"] is False
+    key_registry = json.loads(
+        (AI_AGENT_ACTION_SAMPLE / "DEMO_KEY_REGISTRY.json").read_text(encoding="utf-8")
+    )
+    evidence_manifest = json.loads(
+        (AI_AGENT_ACTION_SAMPLE / "EVIDENCE_MANIFEST.json").read_text(encoding="utf-8")
+    )
+
+    assert receipt["receipt_version"] == "witnessops.receipt.v0"
+    assert receipt["receipt_profile"] == "witnessops.verification_context.v1"
+    assert receipt["workflow_class"] == "compromised_api_key_rotation"
+    assert receipt["signature"]["algorithm"] == "ed25519"
+    assert receipt["signature"]["encoding"] == "hex"
+    assert len(receipt["signature"]["signature"]) == 128
+    assert receipt["signature"]["public_key_id"] == key_registry["keys"][0]["id"]
+    assert key_registry["keys"][0]["purpose"] == "synthetic_demo_receipts_only"
+    assert key_registry["keys"][0]["status"] == "retired"
+    assert verify_result["verdict"] == "VALID_SYNTHETIC_SPECIMEN"
+    assert authority_map["approval"]["approved"] is True
+    assert authority_map["synthetic"] is True
+
+    artifact_ids = {artifact["artifact_id"] for artifact in evidence_manifest["artifacts"]}
+    assert len(artifact_ids) == len(evidence_manifest["artifacts"])
+    for claim in receipt["claims"]:
+        assert set(claim["evidence_refs"]).issubset(artifact_ids)
+
+    limitations = " ".join(receipt["verification_context"]["limitations"]).lower()
+    assert "no real provider" in limitations
+    assert "synthetic" in limitations
+
+
+def test_ai_agent_action_sample_contains_no_credential_material():
+    forbidden_fields = {
+        "api_key",
+        "api_key_value",
+        "credential_value",
+        "secret",
+        "secret_value",
+        "token",
+        "token_value",
+    }
+
+    for relative in REQUIRED_AI_AGENT_ACTION_FILES:
+        path = AI_AGENT_ACTION_SAMPLE / relative
+        if path.suffix not in {".json", ".ndjson"}:
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            parsed = json.loads(line) if path.suffix == ".ndjson" else None
+            if parsed is not None:
+                assert forbidden_fields.isdisjoint(parsed)
+
+    for path in [
+        AI_AGENT_ACTION_SAMPLE / "ACTION_BOUNDARY.json",
+        AI_AGENT_ACTION_SAMPLE / "AUTHORITY_MAP.json",
+        AI_AGENT_ACTION_SAMPLE / "EVIDENCE_MANIFEST.json",
+        AI_AGENT_ACTION_SAMPLE / "RECEIPT.json",
+        AI_AGENT_ACTION_SAMPLE / "VERIFY_RESULT.json",
+        AI_AGENT_ACTION_SAMPLE / "evidence" / "ALERT.json",
+        AI_AGENT_ACTION_SAMPLE / "evidence" / "BEFORE.json",
+        AI_AGENT_ACTION_SAMPLE / "evidence" / "AFTER.json",
+        AI_AGENT_ACTION_SAMPLE / "evidence" / "CHECKS.json",
+    ]:
+        value = json.loads(path.read_text(encoding="utf-8"))
+        stack = [value]
+        while stack:
+            current = stack.pop()
+            if isinstance(current, dict):
+                assert forbidden_fields.isdisjoint(current)
+                stack.extend(current.values())
+            elif isinstance(current, list):
+                stack.extend(current)
 
 
 def test_ai_agent_action_manifest_uses_relative_hashes_and_matches_files():

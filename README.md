@@ -16,7 +16,7 @@ was checked, which files ship, and what the package does **not** prove.
 Public web walkthroughs:
 
 - https://witnessops.com/review/sample-cases
-- AI agent change package, SBOM minimum-elements check, and related examples
+- Signed synthetic compromised-API-key rotation, SBOM minimum-elements check, and related examples
 
 ## Authority boundary
 
@@ -39,7 +39,7 @@ canonical internal verifier.
 ## Current sample packages
 
 ```text
-sample-cases/ai-agent-action-proof-run          # full package — AI agent change
+sample-cases/ai-agent-action-proof-run          # full package — signed synthetic API-key rotation
 sample-cases/content-commitment-receipt         # synthetic byte-commitment lifecycle
 sample-cases/sbom-cisa-2026-minimum-elements    # full package — SBOM min-elements check
 sample-cases/phone-security-proof-pack          # full package — phone security shape
