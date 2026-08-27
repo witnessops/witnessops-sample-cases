@@ -1,48 +1,46 @@
-# Challenge Path
+# Challenge Path — Compromised API Key Rotation
 
-Sample ID: `AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1`
+Sample ID: `COMPROMISED_API_KEY_ROTATION_SAMPLE_V1`
 
-## What A Third Party Can Inspect
+## Reproduce the accepted result
 
-1. Open `AUTHORITY_MAP.json` and confirm the approval boundary exists.
-2. Open `ACTION_BOUNDARY.json` and confirm the allowed and blocked scope are explicit.
-3. Open `EVIDENCE_MANIFEST.json` and confirm the receipt names the artifacts it relies on.
-4. Open `RECEIPT.json` and confirm it does not claim production deployment, legal compliance, or complete AI governance coverage.
-5. Open `VERIFY_RESULT.json` and confirm the verifier result is `pass_with_sample_limitations`.
-6. Check `MANIFEST.sha256` to verify local file hashes for the sample bundle.
+1. Check `MANIFEST.sha256` against the package bytes.
+2. Load `DEMO_KEY_REGISTRY.json` separately from `BUNDLE.wops.json`.
+3. Match the receipt's key ID, Ed25519 algorithm, purpose, status, and full SPKI
+   SHA-256 fingerprint.
+4. Remove `signature` from the parsed receipt, canonicalize with sorted JSON
+   keys and compact separators, and verify the 64-byte Ed25519 signature.
+5. Canonicalize `EVIDENCE_MANIFEST.json` and compare its SHA-256 with the signed
+   receipt's `manifest_hash`.
+6. Hash every exact evidence file and compare the path, byte count, and digest.
+7. Resolve every receipt evidence reference to one manifest artifact.
+8. Reconstruct authority, target, operation order, dual-active interval,
+   canaries, revocation, and final state from the evidence.
 
-## Challenge Questions
+## Required negative outcomes
 
-- Who approved the action?
-- What exact action was approved?
-- What tool or agent acted?
-- What system was touched?
-- What evidence was captured?
-- What result was produced?
-- What could not be independently verified?
-- Is the signature real or simulated?
-- Does the receipt overclaim beyond the evidence?
-
-## Expected Challenge Outcomes
-
-| Challenge | Expected answer |
+| Challenge | Required outcome |
 |---|---|
-| Is this production evidence? | No. Sample only. |
-| Is the signature cryptographic? | No. Simulated. |
-| Is the approval boundary explicit? | Yes. See `AUTHORITY_MAP.json`. |
-| Is the action scope explicit? | Yes. See `ACTION_BOUNDARY.json`. |
-| Is there a verifier result? | Yes. See `VERIFY_RESULT.json`. |
-| Does the bundle claim complete AI governance coverage? | No. That claim is explicitly out of scope. |
+| Change one receipt field | `SIGNATURE_INVALID` |
+| Replace the key and re-sign | `UNTRUSTED_SIGNER` |
+| Change one evidence byte | `ARTIFACT_DIGEST_MISMATCH` |
+| Remove or duplicate evidence | `BUNDLE_INVALID` |
+| Add an absolute or traversal path | `BUNDLE_INVALID` |
+| Execute before or after authority | `AUTHORITY_SEQUENCE_INVALID` |
+| Add an unapproved operation or target | `SCOPE_VIOLATION` |
+| Reuse the old fingerprint as the replacement | `ROTATION_IDENTITY_INVALID` |
+| Leave the consumer on the old key | `MIGRATION_NOT_CONFIRMED` |
+| Let the old-key post-revocation probe succeed | `OLD_KEY_STILL_ACCEPTED` |
+| Include credential material | `SECRET_MATERIAL_PRESENT` |
 
-## Failure Path
+## Trust boundary
 
-The proof should be rejected if any of these are true:
+The demo registry is a purpose-limited public trust input. It is not a production
+key registry or organization-wide trust root. A website compromise could replace
+the page, bundle, verifier, and key together, so a high-assurance reviewer should
+compare the key fingerprint and verifier source with the exact public Git commit
+linked by the deployed page.
 
-- the receipt is represented as production evidence
-- the simulated signature is represented as cryptographic proof
-- the approval boundary is missing
-- the action boundary is missing
-- the evidence manifest is missing
-- the verifier result is missing
-- the receipt claims legal compliance or complete AI governance coverage
-
+This package is synthetic. It must be rejected if represented as proof of a real
+compromise, real provider rotation, production key custody, compliance, or whole-
+environment security.

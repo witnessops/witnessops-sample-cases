@@ -1,50 +1,94 @@
-# AI Agent Action Proof Run Sample
+# Compromised API Key Rotation — Signed Synthetic Specimen
 
-Sample ID: `AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1`
+Sample ID: `COMPROMISED_API_KEY_ROTATION_SAMPLE_V1`
 
-Status: `sample_receipt_shape_ready`
+Status: `signed_synthetic_specimen`
 
-## Purpose
+## The 17-second story
 
-**Situation:** an AI agent proposed and applied one bounded code or configuration change after human approval.
+A synthetic detector flags one API-key fingerprint as exposed. A remediation
+agent proposes an exact contract. A synthetic security owner authorizes only
+that contract. The rotation tool then:
 
-**Buyer title on the site:** AI agent change package.
+1. creates a distinct replacement without reading or exporting secret material;
+2. moves one synthetic consumer to the replacement;
+3. proves the replacement is accepted;
+4. revokes the old credential;
+5. proves the old credential is rejected; and
+6. performs a separate final-state read-back.
 
+The receipt is cryptographically signed with a purpose-limited Ed25519 demo key.
+The evidence manifest binds every public artifact by SHA-256. The website and
+downloadable verifier recompute the signature, published-key match, artifact
+hashes, evidence references, and rotation semantics rather than trusting
+`VERIFY_RESULT.json`.
 
-This sample shows how WitnessOps packages one consequential AI-agent-assisted workflow into a portable proof bundle.
+## What is independently checkable
 
-For a buyer-focused reading path, start with [`BUYER_WALKTHROUGH.md`](./BUYER_WALKTHROUGH.md).
+- The receipt signature is mathematically valid for the canonical unsigned
+  receipt under the separately published demo public key.
+- The demo-key fingerprint matches the purpose-limited public registry.
+- The receipt's manifest hash matches the canonical evidence manifest.
+- Every exact evidence file matches its declared SHA-256 digest.
+- Every receipt claim resolves to named evidence.
+- The included synthetic evidence supports the declared authority, target,
+  action order, consumer migration, replacement-key acceptance, old-key
+  revocation, old-key rejection, and final state.
+- The package contains identifiers and fingerprints only, never credential
+  values.
 
-Sample workflow:
+## What this does not prove
 
-1. AI agent proposes a bounded code/config change.
-2. Human approver grants a scoped approval.
-3. Agent/tool performs the bounded action.
-4. Evidence is captured.
-5. Receipt is signed or simulated.
-6. Verifier reports pass/fail.
-7. Challenge path explains what a third party can inspect.
+This is a deterministic synthetic demonstration. No real provider, credential,
+compromise, customer, or production system was used or checked. A valid
+signature establishes integrity under the published demo key; it does not
+establish source-system honesty, production signing-key custody, legal
+compliance, or whole-environment security.
 
-## Boundary
+The replay on the website presents this already-signed run. Clicking replay does
+not approve or execute a new action.
 
-This sample proves the receipt shape and verifier path only.
-
-It does not claim production deployment, legal compliance, or complete AI governance coverage.
-
-The receipt signature is simulated. The verifier result is sample-only and should not be represented as a production verification.
-
-## Bundle
+## Package
 
 | File | Purpose |
 |---|---|
-| `AUTHORITY_MAP.json` | Who approved, who/what acted, and which boundary controlled the action |
-| `ACTION_BOUNDARY.json` | What the agent/tool was allowed and blocked from doing |
-| `EVIDENCE_MANIFEST.json` | Which proof artifacts are included |
-| `RECEIPT.json` | Portable receipt for the action |
-| `VERIFY_RESULT.json` | Sample verifier result and limitations |
-| `CHALLENGE_PATH.md` | Third-party inspection and challenge path |
-| `MANIFEST.sha256` | Local hash manifest for this sample bundle |
+| `ACTION_BOUNDARY.json` | Exact target, allowed/prohibited operations, success, timeout, rollback, and recovery |
+| `AUTHORITY_MAP.json` | Distinct proposer, approver, executor, verifier, and single-use authority |
+| `evidence/ALERT.json` | Synthetic exposure alert with fingerprint only |
+| `evidence/BEFORE.json` | Initial synthetic provider and consumer state |
+| `evidence/EVENTS.ndjson` | Ordered mutation, probe, revocation, and read-back events |
+| `evidence/AFTER.json` | Independent synthetic final-state read-back |
+| `evidence/CHECKS.json` | Reference expectations; never trusted as the verifier result |
+| `EVIDENCE_MANIFEST.json` | Canonical evidence inventory and SHA-256 bindings |
+| `RECEIPT.json` | Canonical WitnessOps profiled receipt with Ed25519 signature |
+| `DEMO_KEY_REGISTRY.json` | Purpose, status, public key, and SPKI fingerprint |
+| `DEMO_PUBLIC_KEY.pem` | Public verification key; no private key is retained |
+| `BUNDLE.wops.json` | Single-file portable bundle containing exact receipt and evidence bytes |
+| `VERIFY_RESULT.json` | Reference output for comparison, not verification authority |
+| `MANIFEST.sha256` | Drift check for the complete published package |
 
-## Commercial Point
+## Verify
 
-WitnessOps gives enterprises a receipt they can verify after an AI agent acts.
+From this directory:
+
+```bash
+shasum -a 256 -c MANIFEST.sha256
+```
+
+Public browser verification and the dependency-free offline verifier are served
+from the WitnessOps sample page:
+
+`https://witnessops.com/review/sample-cases/ai-agent-action-proof-run`
+
+## Producer provenance
+
+The receipt uses the canonical receipt profile in
+`witnessops-contracts@444a2f93ee8d46009f5c737e9d6dfb231b1587fc` and the exact
+canonicalization/signing convention documented by
+`witnessops-proof-engine@14eeb9b05d2eadde7bced0d5e41122c2bca27d07`:
+sorted JSON keys, compact separators, the unsigned receipt only, Ed25519, and
+hex-encoded raw signature bytes.
+
+The purpose-limited demo keypair was generated in memory for this specimen. The
+private key was never written to this repository and was not persisted after
+generation.

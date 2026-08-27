@@ -1,46 +1,42 @@
 {
   "schema": "witnessops.authority_map.v1",
-  "sample_id": "AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1",
-  "generated_at": "2026-04-25T13:42:38Z",
-  "authority_boundary": {
-    "action_class": "agent_assisted_code_config_change",
-    "approval_required": true,
-    "approver": {
-      "id": "human_approver_sample_001",
-      "role": "engineering_manager",
-      "authority": "approve one bounded sample config change"
-    },
-    "operator": {
-      "id": "operator_sample_001",
-      "role": "witnessops_operator",
-      "authority": "execute only within approved proof-run boundary"
-    },
-    "agent_or_tool": {
-      "id": "agent_sample_001",
-      "name": "sample_ai_agent",
-      "tool_path": "sample_agent_to_config_change",
-      "authority": "propose and apply one approved sample config change"
-    },
-    "system_touched": {
-      "id": "system_sample_001",
-      "name": "sample_config_repository",
-      "environment": "sample_only",
-      "production": false
-    }
+  "sample_id": "COMPROMISED_API_KEY_ROTATION_SAMPLE_V1",
+  "authority_id": "authority_demo_rotation_20260827_001",
+  "roles": {
+    "proposer": "remediation_agent_demo_001",
+    "approver": "security_owner_demo_001",
+    "executor": "credential_rotation_tool_demo_001",
+    "verifier": "witnessops_demo_verifier_v1"
   },
-  "approval_gate": {
-    "approval_id": "approval_sample_20260425_001",
-    "approved_at": "2026-04-25T13:42:38Z",
-    "approved_by": "human_approver_sample_001",
-    "approval_text": "Approve sample AI-agent action proof run for one bounded config change only.",
-    "expires_after_action": true
+  "approval": {
+    "approved": true,
+    "approved_at": "2026-08-27T12:00:10Z",
+    "expires_at": "2026-08-27T12:01:10Z",
+    "approved_by": "security_owner_demo_001",
+    "contract_id": "contract_demo_rotation_20260827_001",
+    "exact_target": {
+      "provider": "Northstar API (synthetic)",
+      "tenant": "sandbox_tenant_001",
+      "consumer": "billing_worker_demo",
+      "old_key_id": "sk_demo_old_7F2C91",
+      "old_key_fingerprint": "sha256:457612e26457c27e1443f6dfae65c12106f045ecdaed588eba7f43dbf06885d5"
+    },
+    "allowed_operations": [
+      "create_replacement",
+      "update_consumer_reference",
+      "probe_replacement",
+      "revoke_old",
+      "probe_old",
+      "read_back_state"
+    ],
+    "approval_text": "Approve one replayable synthetic API-key rotation under the exact contract. No real provider, secret, customer, or production system is authorized.",
+    "single_use": true
   },
   "negative_boundaries": [
-    "No production deployment is claimed.",
-    "No legal compliance conclusion is claimed.",
-    "No unrestricted agent authority is claimed.",
-    "No access to secrets, customer data, or live systems is claimed.",
-    "No complete AI governance coverage is claimed."
-  ]
+    "No real credential compromise is asserted.",
+    "No production system or provider is contacted.",
+    "No secret value is generated, stored, transmitted, or displayed.",
+    "No legal compliance or security certification is asserted."
+  ],
+  "synthetic": true
 }
-

@@ -1,59 +1,17 @@
 {
-  "schema": "witnessops.verify_result.v1",
-  "sample_id": "AI_AGENT_ACTION_PROOF_RUN_SAMPLE_V1",
-  "verified_at": "2026-04-25T13:42:38Z",
-  "verifier": {
-    "name": "witnessops_sample_verifier",
-    "mode": "sample_only"
+  "schema": "witnessops.demo_verify_result.v1",
+  "verifier": "witnessops_demo_verifier_v1",
+  "fixture": "compromised_api_key_rotation_v1",
+  "receipt_id": "pr_demo_api_key_rotation_20260827_001",
+  "verdict": "VALID_SYNTHETIC_SPECIMEN",
+  "checks": {
+    "signature_math": "pass",
+    "published_demo_key": "pass",
+    "evidence_integrity": "pass_7_of_7",
+    "receipt_references": "pass",
+    "rotation_semantics": "pass_8_of_8",
+    "real_provider_action_checked": "no"
   },
-  "result": "pass_with_sample_limitations",
-  "checks": [
-    {
-      "id": "required_files_present",
-      "status": "pass",
-      "evidence": [
-        "README.md",
-        "AUTHORITY_MAP.json",
-        "ACTION_BOUNDARY.json",
-        "EVIDENCE_MANIFEST.json",
-        "RECEIPT.json",
-        "VERIFY_RESULT.json",
-        "CHALLENGE_PATH.md"
-      ]
-    },
-    {
-      "id": "authority_gate_present",
-      "status": "pass",
-      "evidence": "AUTHORITY_MAP.json#approval_gate"
-    },
-    {
-      "id": "action_boundary_present",
-      "status": "pass",
-      "evidence": "ACTION_BOUNDARY.json#allowed_scope"
-    },
-    {
-      "id": "challenge_path_present",
-      "status": "pass",
-      "evidence": "CHALLENGE_PATH.md"
-    },
-    {
-      "id": "receipt_signature",
-      "status": "limited",
-      "evidence": "RECEIPT.json#signature",
-      "note": "Signature is simulated for sample receipt shape only."
-    }
-  ],
-  "failure_state_notes": [
-    "If a required artifact is missing, verifier result must fail.",
-    "If approval boundary is absent, verifier result must fail.",
-    "If receipt claims production deployment, verifier result must fail for this sample.",
-    "If signature is represented as real cryptographic proof, verifier result must fail."
-  ],
-  "non_claims": [
-    "This is not a production deployment proof.",
-    "This is not a legal compliance opinion.",
-    "This is not complete AI governance coverage.",
-    "This is not a live customer or cloud-system proof run."
-  ]
+  "boundary": "Reference output for comparison only. The browser and offline verifiers recompute this result from the bundle and separately published demo key.",
+  "synthetic": true
 }
-
